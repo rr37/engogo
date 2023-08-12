@@ -7,7 +7,7 @@ const app = express()
 const exphbs = require('express-handlebars')
 // 引用 helpers
 const helpers = require('handlebars-helpers')()
-
+app.use(express.static('public'))
 // 設定 helpers
 app.engine('hbs', 
   exphbs({ 

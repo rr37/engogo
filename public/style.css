@@ -1,0 +1,76 @@
+.login-main-navbar {
+  width: 632px;
+  height: 87px;
+  border-radius: 0 0 32px 0;
+  position: fixed;
+  padding: 0 30px;
+  justify-content: space-between;
+  align-items: center;
+  background: #f2a025;
+}
+
+.login-main-navbar > h2 {
+  color: #fff;
+}
+.selected {
+  border-bottom: 2px solid #fff;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #f2a025;
+}
+
+.color-main {
+  color: #f2a025;
+}
+
+.main-page-badge {
+  width: 110px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  background-color: #f2a025;
+  color: #fff;
+  font-size: 16px;
+  letter-spacing: 0.1em;
+}
+
+.journey {
+  width: 100%;
+  border-radius: 20px;
+  padding: 20px 30px 50px 30px !important;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff8eb;
+  z-index: 10;
+}
+
+.today-mission-card {
+  cursor: pointer;
+  transition-duration: 0.1s;
+  transition-timing-function: ease-in-out;
+}
+
+.today-mission-card:hover {
+  transform: translateY(-5px);
+}
+
+.today-mission-card:active {
+  z-index: 9999;
+}
+
+.Q {
+  /* width: 65%; */
+  height: 100px;
+  border: 1px dashed #f2a025;
+  border-radius: 24px;
+  margin-bottom: 2%;
+  background: #fff;
+}
