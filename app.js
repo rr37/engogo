@@ -9,11 +9,12 @@ const exphbs = require('express-handlebars')
 const helpers = require('handlebars-helpers')()
 app.use(express.static('public'))
 // 設定 helpers
-app.engine('hbs', 
-  exphbs({ 
+app.engine(
+  'hbs',
+  exphbs({
     helpers: helpers,
-    defaultLayout: 'main', 
-    extname: '.hbs' 
+    defaultLayout: 'main',
+    extname: '.hbs',
   })
 )
 
@@ -25,6 +26,8 @@ if (process.env.NODE_ENV !== 'production') {
 }
 // 宣告 PORT
 const PORT = process.env.PORT
+
+app.use(express.urlencoded({ extended: true }))
 
 // 設定路由
 app.get('/', (req, res) => {
