@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'followedUserId',
         as: 'Followers',
       })
-      User.hasMany(models.Like, { foreignKey: userId })
+      User.hasMany(models.Like, { foreignKey: 'userId' })
     }
   }
   User.init(
