@@ -31,7 +31,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
-      missionCard_id: {
+      mission_card_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
       },

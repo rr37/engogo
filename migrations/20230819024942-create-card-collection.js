@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      missionCard_id: {
+      mission_card_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
