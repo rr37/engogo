@@ -7,6 +7,8 @@ const app = express()
 const exphbs = require('express-handlebars')
 // 引用 helpers
 const helpers = require('handlebars-helpers')()
+
+const routes = require('./routes')
 app.use(express.static('public'))
 // 設定 helpers
 app.engine(
@@ -29,10 +31,7 @@ const PORT = process.env.PORT
 
 app.use(express.urlencoded({ extended: true }))
 
-// 設定路由
-app.get('/', (req, res) => {
-  res.render('index')
-})
+app.use(routes)
 
 // 設定監聽運行訊息
 app.listen(PORT, () => {
