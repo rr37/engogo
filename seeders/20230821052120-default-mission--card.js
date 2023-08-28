@@ -344,11 +344,18 @@ const missionImageRelation = [
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
+    // 找到 admin user id
+    const adminUserId = await queryInterface.sequelize.query(
+      `SELECT id FROM Users WHERE role = 'admin'`,
+      {
+        type: queryInterface.sequelize.QueryTypes.SELECT,
+      }
+    )
     for (let i = 0; i < missionImageRelation.length; i++) {
       // 將任務存進 Mission 資料表
       await queryInterface.bulkInsert('Missions', [
         {
-          creator_id: 1,
+          creator_id: adminUserId[0].id,
           mission: missionImageRelation[i].mission,
           is_visible: 1,
           created_at: new Date(),
@@ -358,7 +365,7 @@ module.exports = {
       // 將卡片底圖存進 CardImage 資料表
       await queryInterface.bulkInsert('CardImages', [
         {
-          creator_id: 1,
+          creator_id: adminUserId[0].id,
           card_image: missionImageRelation[i].card_image,
           is_visible: 1,
           created_at: new Date(),
@@ -369,8 +376,8 @@ module.exports = {
       await queryInterface.bulkInsert('MissionCards', [
         {
           mission_id: i + 1,
-          cardImage_id: i + 1,
-          creator_id: 1,
+          card_image_id: i + 1,
+          creator_id: adminUserId[0].id,
           created_at: new Date(),
           updated_at: new Date(),
         },
