@@ -1,0 +1,9 @@
+<div class='login-main-navbar d-flex'>
+  {{! logo }}
+  <a href='/' class=''>
+    <img src='/image/engogo_logo.png' />
+  </a>
+  <h2 {{#if isHome}}class='selected'{{/if}}><a href="/">Home</a></h2>
+  <h2 {{#if isExplore}}class='selected'{{/if}}><a href="/explore">Explore</a></h2>
+  <h2>Logout</h2>
+</div>

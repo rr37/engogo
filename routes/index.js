@@ -7,6 +7,6 @@ const journalController = require('../controllers/journal-controller')
 router.get('/explore', journalController.getJournals)
 
 // 首頁：
-router.get('/', (req, res, next) => res.render('userPage'))
+router.get('/', (req, res, next) => res.render('userPage', { isHome: true }))
 
 module.exports = router

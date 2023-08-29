@@ -19,7 +19,7 @@ const journalController = {
     })
       .then((journals) => {
         console.log(journals[0])
-        res.render('explore', { journals })
+        res.render('explore', { journals, isExplore: true })
       })
       .catch((err) => next(err))
   },

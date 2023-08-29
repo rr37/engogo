@@ -75,3 +75,8 @@ h6 {
   margin-bottom: 2%;
   background: #fff;
 }
+
+a {
+  text-decoration: none !important;
+  color:#fff !important;
+}
