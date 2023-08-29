@@ -12,12 +12,13 @@ const journalController = {
     Journal.findAll({
       include: [
         { model: MissionCard, include: [{ model: CardImage }], nest: true },
+        { model: User }
       ],
       raw: true,
       nest: true,
     })
       .then((journals) => {
-        console.log(journals[0].MissionCard)
+        console.log(journals[0])
         res.render('explore', { journals })
       })
       .catch((err) => next(err))

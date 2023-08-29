@@ -10,7 +10,7 @@ module.exports = {
         name: 'root',
         email: 'root@example.com',
         password: await bcrypt.hash('root', 10),
-        avatar: `https://loremflickr.com/320/240/headshot/?random=${
+        avatar: `https://loremflickr.com/320/320/headshot/?random=${
           Math.random() * 10
         }`,
         role: 'admin',
