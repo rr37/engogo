@@ -13,6 +13,7 @@
 .login-main-navbar > h2 {
   color: #fff;
 }
+
 .selected {
   border-bottom: 2px solid #fff;
 }
@@ -28,6 +29,10 @@ h6 {
 
 .color-main {
   color: #f2a025;
+}
+
+.color-white {
+  color: #fff;
 }
 
 .main-page-badge {
@@ -78,5 +83,8 @@ h6 {
 
 a {
   text-decoration: none !important;
-  color:#fff !important;
+}
+
+a:hover {
+  color:#c2790c !important;
 }
