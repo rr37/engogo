@@ -1,0 +1,127 @@
+<!-- Modal -->
+<div
+  class='modal fade'
+  id='exampleModal'
+  data-bs-backdrop="static"
+  tabindex='-1'
+  aria-labelledby='exampleModalLabel'
+  aria-hidden='true'
+>
+  <div
+    class='modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable'
+    style=''
+  >
+    <div
+      class='modal-content d-flex flex-row'
+      style='background-color:#fff8eb; border-radius: 30px; height: 90vh; overflow: hidden;'
+    >
+      {{! 時間}}
+      <div
+        class='col-sm-6 col-md-5 col-lg-4 p-2 ps-4 pe-4'
+        style='position: absolute; background-color:rgba(242, 160, 37, 0.44); display:flex; align-items:center;border-radius:0 0 20px 0'
+      >
+        <div
+          class='color-white'
+          style='text-align:center; font-size:1.7em; font-weight:600'
+        >20230630 &nbsp&nbsp 天氣：</div>
+      </div>
+      {{!-- 取消＆儲存按鈕 --}}
+      <div style='position:absolute;bottom: 2%;right: 3%;'>
+        <button
+          type='button'
+          class='btn btn-secondary me-2'
+          data-bs-dismiss='modal'
+          style="background-color: #BFBFBF; border:#BFBFBF;"
+        >Close</button>
+        <button type='button' class='btn btn-primary' style="background-color: #f2a025; border:#f2a025">Save changes</button>
+      </div>
+      {{! Modal 左欄}}
+      <div
+        class='col-sm-6 col-md-5 col-lg-4 d-flex flex-column align-items-center justify-content-end p-5 ps-0 pe-0 pb-2'
+      >
+
+        {{! 能力值 }}
+        <figure class='col-7 flex-shrink-0 mb-4' style='overflow: hidden;'>
+          <img
+            src='/image/star.png'
+            style='object-fit: cover;width:100%;height:100%'
+          />
+        </figure>
+        {{! 卡牌}}
+        <figure
+          class='today-mission-card col-9'
+          style='border-radius: 25px; overflow: hidden'
+        >
+          <div
+            class='d-flex align-items-center'
+            style='position: absolute; width: 230px; padding: 3px 12px'
+          >
+            {{! <div style='font-size: 40px; font-weight: bold'>32</div>
+                    <div
+                      style='font-size: 10px; margin-left: 8px'
+                    >想出三個你最想收到的生日禮物，挑一個嘗試用英語形容你為什麼喜歡這個禮物。</div> }}
+          </div>
+          <img
+            src='/image/demo_card2.png'
+            style='object-fit: cover;width:100%;'
+          />
+        </figure>
+      </div>
+      {{! Modal 右欄}}
+      <div
+        class='col-sm-6 col-md-7 col-lg-8 pt-5 d-flex flex-column justify-content-start align-items-center'
+        style='overflow-y: scroll;'
+      >
+        {{! 問題 }}
+        <div class='Q col-11' style='height: 25vh;'>
+          <div class='d-flex align-items-start ps-2'>
+            <div
+              class=''
+              style='font-size: 30px; font-weight: 500; color:#f2a025'
+            >Q1</div>
+            <div class='d-flex flex-column justify-content-center ps-2 mt-2'>
+              <div>我在這一張卡牌中做了什麼呢？</div>
+              <div class='mt-1'>{{this.q1}}</div>
+            </div>
+          </div>
+        </div>
+        <div class='Q col-11' style='height: 25vh;'>
+          <div class='d-flex align-items-start ps-2'>
+            <div
+              class=''
+              style='font-size: 30px; font-weight: 500; color:#f2a025'
+            >Q2</div>
+            <div class='d-flex flex-column justify-content-center ps-2 mt-2'>
+              <div>完成任務之後，我有什麼感受呢？</div>
+              <div class='mt-1'>{{this.q2}}</div>
+            </div>
+          </div>
+        </div>
+        <div class='Q col-11' style='height: 25vh;'>
+          <div class='d-flex align-items-start ps-2'>
+            <div
+              class=''
+              style='font-size: 30px; font-weight: 500; color:#f2a025'
+            >Q3</div>
+            <div class='d-flex flex-column justify-content-center ps-2 mt-2'>
+              <div>我想對＿＿＿＿＿説的一句話...</div>
+              <div class='mt-1'>{{this.q3}}</div>
+            </div>
+          </div>
+        </div>
+        <div class='Q col-11' style='height: 25vh;'>
+          <div class='d-flex align-items-start ps-2'>
+            <div
+              class=''
+              style='font-size: 30px; font-weight: 500; color:#f2a025'
+            >Q3</div>
+            <div class='d-flex flex-column justify-content-center ps-2 mt-2'>
+              <div>我想對＿＿＿＿＿説的一句話...</div>
+              <div class='mt-1'>{{this.q3}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

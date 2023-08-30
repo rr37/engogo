@@ -1,3 +1,4 @@
+{{> modal}}
 {{#each userJournals}}
   <div class='row' style='margin-top: -200px; margin-bottom: 250px'>
     <div class='journey'>
@@ -13,7 +14,7 @@
               >Q1</div>
               <div class='d-flex flex-column justify-content-center ps-2 mt-2'>
                 <div>我在這一張卡牌中做了什麼呢？</div>
-                <div class="mt-1">{{this.q1}}</div>
+                <div class='mt-1'>{{this.q1}}</div>
               </div>
             </div>
           </div>
@@ -25,7 +26,7 @@
               >Q2</div>
               <div class='d-flex flex-column justify-content-center ps-2 mt-2'>
                 <div>完成任務之後，我有什麼感受呢？</div>
-                <div class="mt-1">{{this.q2}}</div>
+                <div class='mt-1'>{{this.q2}}</div>
               </div>
             </div>
           </div>
@@ -37,7 +38,7 @@
               >Q3</div>
               <div class='d-flex flex-column justify-content-center ps-2 mt-2'>
                 <div>我想對＿＿＿＿＿説的一句話...</div>
-                <div class="mt-1">{{this.q3}}</div>
+                <div class='mt-1'>{{this.q3}}</div>
               </div>
             </div>
           </div>
@@ -99,6 +100,8 @@
               display:flex;
               justify-content: center;
               align-items: center;'
+          data-bs-toggle='modal'
+          data-bs-target='#exampleModal'
         >
           <img
             src='/icon/_base/edit.png'
