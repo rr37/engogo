@@ -10,41 +10,25 @@ const {
 const userController = {
   getUserJournalsPage: (req, res, next) => {
     const userId = req.params.id
-    Promise.all([
-      User.findByPk(userId, { raw: true }),
-      Journal.findAll({
-        where: { userId },
+      User.findByPk(userId, {
         include: [
-          { model: MissionCard, include: [{ model: CardImage }], nest: true },
-          { model: User },
+          {
+            model: Journal,
+            include: [{ model: MissionCard, include: [{ model: CardImage }] }],
+            nest: true,
+            
+          },
         ],
-        raw: true,
         nest: true,
-      }),
-    ])
-      // User.findByPk(userId, {
-      //   include: [
-      //     {
-      //       model: Journal,
-      //       include: [{ model: MissionCard, include: [{ model: CardImage }] }],
-      //       nest: true,
-      //       raw: true,
-      //     },
-      //   ],
-      //   raw: true,
-      //   nest: true,
-      // })
-      // Journal.findAll({
-      //   include: [{ model: User }],
-      //   where: { userId },
-      //   raw: true,
-      //   nest: true,
-      // })
-      .then(([userData, userJournals]) => {
-        console.log(userData)
-        res.render('userPage', { userData, userJournals })
       })
-      .catch((err) => next(err))
+        .then((userData) => {
+          // console.log(JSON.stringify(userData, null, 2))
+          userData = userData.toJSON()
+          const userJournals = userData.Journals
+          console.log(userJournals)
+          res.render('userPage', { userData, userJournals })
+        })
+        .catch((err) => next(err))
   },
 }
 
