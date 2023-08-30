@@ -1,0 +1,30 @@
+<div class='row' style='margin-top: -200px; margin-bottom: 250px'>
+  <div class='journey pb-1'>
+    <div class='d-flex flex-wrap align-content-end pt-2'>
+      <div class='row'>
+        {{#each userMissionCards}}
+          <div class='col-lg-3 col-md-4 col-sm-5 mb-2'>
+            <figure
+              class='today-mission-card'
+              style='width: 100%; border-radius: 10%; overflow: hidden'
+            >
+              <div
+                class='d-flex align-items-center'
+                style='position: absolute; width: 230px; padding: 3px 12px'
+              >
+                {{! <div style='font-size: 40px; font-weight: bold'>32</div>
+                    <div
+                      style='font-size: 10px; margin-left: 8px'
+                    >想出三個你最想收到的生日禮物，挑一個嘗試用英語形容你為什麼喜歡這個禮物。</div> }}
+              </div>
+              <img
+                src='{{this.MissionCard.CardImage.cardImage}}'
+                style='object-fit: cover;width:100%'
+              />
+            </figure>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</div>
