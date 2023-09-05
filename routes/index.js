@@ -13,6 +13,7 @@ const userController = require('../controllers/user-controller')
 router.get('/explore', authenticator, journalController.getJournals)
 
 router.get('/signup', userController.signUpPage)
+router.post('/signup', userController.signUp)
 router.get('/signin', userController.signInPage)
 router.post(
   '/signin',

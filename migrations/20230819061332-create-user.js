@@ -22,6 +22,7 @@ module.exports = {
       },
       avatar: {
         type: Sequelize.STRING,
+        defaultValue: '/image/avatar.png',
       },
       role: {
         defaultValue: 'user',

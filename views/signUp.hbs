@@ -1,15 +1,40 @@
 <h1>註冊</h1>
+{{!-- 註冊表單 --}}
+<form action='/signup' method='POST'>
 <div class='d-flex flex-column mt-4'>
   <div class='d-flex justify-content-between align-items-center'>
     <div class='ms-1' style='color: #898989;'>帳號</div>
     <div
       class='color-main'
       style='font-size: 0.8em; font-weight:400' class='color-main'
-    ><a href="/signIn" class='color-main'>已經有帳號？ 登入</a></div>
+    ><a href="/signin" class='color-main'>已經有帳號？ 登入</a></div>
   </div>
   <input
     type='text'
     class='mt-2'
+    name='account'
+    style='border: 2px solid #F4F4F4;border-radius:3px; background-color: #F4F4F4'
+  />
+</div>
+<div class='d-flex flex-column mt-3'>
+  <div class='d-flex justify-content-between align-items-center'>
+    <div class='ms-1' style='color: #898989;'>電子信箱</div>
+  </div>
+  <input
+    type='text'
+    class='mt-2'
+    name='email'
+    style='border: 2px solid #F4F4F4;border-radius:3px; background-color: #F4F4F4'
+  />
+</div>
+<div class='d-flex flex-column mt-3'>
+  <div class='d-flex justify-content-between align-items-center'>
+    <div class='ms-1' style='color: #898989;'>暱稱</div>
+  </div>
+  <input
+    type='text'
+    class='mt-2'
+    name='name'
     style='border: 2px solid #F4F4F4;border-radius:3px; background-color: #F4F4F4'
   />
 </div>
@@ -20,6 +45,7 @@
   <input
     type='text'
     class='mt-2'
+    name='password'
     style='border: 2px solid #F4F4F4;border-radius:3px; background-color: #F4F4F4'
   />
 </div>
@@ -30,6 +56,7 @@
   <input
     type='text'
     class='mt-2'
+    name='checkPassword'
     style='border: 2px solid #F4F4F4;border-radius:3px; background-color: #F4F4F4'
   />
 </div>
@@ -55,8 +82,9 @@
     </figure>
   </div>
   <button
-    type='button'
+    type='submit'
     class='btn btn-primary'
     style='background-color: #f2a025; border:#f2a025; height: 80%'
   >Submit</button>
 </div>
+</form>

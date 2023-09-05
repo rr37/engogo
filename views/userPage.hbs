@@ -58,5 +58,12 @@
 {{#if userMissionCards}}
 {{> userPageMissionCards}}
 {{/if}}
+{{#if emptyData}}
+{{!-- 空白膚色底圖 --}}
+<div class='row' style='margin-top: -200px; margin-bottom: 250px'>
+    <div class='journey' style="height: 40vh">
+    </div>
+</div>
+{{/if}}
 {{! 中下下留空 }}
 <div class='row' style='height: 180px;'></div>
