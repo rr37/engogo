@@ -3,7 +3,7 @@
   <a href='/' class=''>
     <img src='/image/engogo_logo.png' />
   </a>
-  <h2 {{#if isHome}}class='selected'{{/if}} color-white><a href="/users/31/journals" class="color-white">Home</a></h2>
+  <h2 {{#if isHome}}class='selected'{{/if}} color-white><a href="/users/{{userData.id}}/journals" class="color-white">Home</a></h2>
   <h2 {{#if isExplore}}class='selected'{{/if}}><a href="/explore" class="color-white">Explore</a></h2>
   <h2>Logout</h2>
 </div>
