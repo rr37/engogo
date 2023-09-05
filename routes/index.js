@@ -4,6 +4,10 @@ const router = express.Router()
 const users = require('./modules/users')
 
 const journalController = require('../controllers/journal-controller')
+const userController = require('../controllers/user-controller')
+
+router.get('/signup', userController.signUpPage)
+router.get('/signin', userController.signInPage)
 
 // users 頁面交給 userController 處理
 router.use('/users', users)

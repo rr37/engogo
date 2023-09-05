@@ -49,6 +49,12 @@ const userController = {
       })
       .catch((err) => next(err))
   },
+  signUpPage: (req, res, next) => {
+    res.render('signUp', { layout: 'signIn&Up' })
+  },
+  signInPage: (req, res, next) => {
+    res.render('signIn', { layout: 'signIn&Up' })
+  },
 }
 
 module.exports = userController
