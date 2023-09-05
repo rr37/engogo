@@ -58,6 +58,11 @@ const userController = {
   signIn: (req, res, next) => {
     res.redirect('/explore')
   },
+  logout: (req, res, next) => {
+    req.logout()
+    req.flash('success_messages', '你已成功登出！')
+    res.redirect('/signin')
+  }
 }
 
 module.exports = userController
