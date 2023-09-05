@@ -7,8 +7,11 @@ const app = express()
 const exphbs = require('express-handlebars')
 // 引用 helpers
 const helpers = require('handlebars-helpers')()
+const session = require('express-session')
+const flash = require('connect-flash')
 
 const routes = require('./routes')
+const passport = require('./config/passport')
 app.use(express.static('public'))
 // 設定 helpers
 app.engine(
@@ -30,6 +33,23 @@ if (process.env.NODE_ENV !== 'production') {
 const PORT = process.env.PORT
 
 app.use(express.urlencoded({ extended: true }))
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || 'ThisMySecret',
+    resave: false,
+    saveUninitialized: false,
+  })
+)
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(flash())
+app.use((req, res, next) => {
+  res.locals.success_messages = req.flash('success_messages')
+  res.locals.error_messages = req.flash('error_messages')
+  res.locals.warning_messages = req.flash('warning_messages')
+  next()
+})
 
 app.use(routes)
 

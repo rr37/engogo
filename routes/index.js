@@ -1,21 +1,31 @@
 const express = require('express')
 const router = express.Router()
+const passport = require('../config/passport')
+
+const { authenticator, authenticatedAdmin } = require('../middleware/auth')
 
 const users = require('./modules/users')
 
 const journalController = require('../controllers/journal-controller')
 const userController = require('../controllers/user-controller')
 
+// 探索頁面：取得所有 journals
+router.get('/explore', authenticator, journalController.getJournals)
+
 router.get('/signup', userController.signUpPage)
 router.get('/signin', userController.signInPage)
-
+router.post(
+  '/signin',
+  passport.authenticate('local', {
+    failureRedirect: '/signup',
+    failureFlash: true,
+  }),
+  userController.signIn
+)
 // users 頁面交給 userController 處理
-router.use('/users', users)
-
-// 探索頁面：取得所有 journals
-router.get('/explore', journalController.getJournals)
+router.use('/users',authenticator, users)
 
 // 首頁：
-router.get('/', (req, res, next) => res.render('userPage', { isHome: true }))
+router.get('/', (req, res, next) => res.redirect('/explore'))
 
 module.exports = router

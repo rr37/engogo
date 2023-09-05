@@ -55,6 +55,9 @@ const userController = {
   signInPage: (req, res, next) => {
     res.render('signIn', { layout: 'signIn&Up' })
   },
+  signIn: (req, res, next) => {
+    res.redirect('/explore')
+  },
 }
 
 module.exports = userController
