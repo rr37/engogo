@@ -9,7 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       date: {
-        allowNull: false,
+        defaultValue: new Date(),
         type: Sequelize.DATE,
       },
       weather: {
@@ -25,6 +25,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       status: {
+        defaultValue: 'inProgress',
         type: Sequelize.STRING,
       },
       user_id: {
