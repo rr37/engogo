@@ -225,7 +225,8 @@ const userController = {
     res.render('signIn', { layout: 'signIn&Up' })
   },
   signIn: (req, res, next) => {
-    res.redirect('/explore')
+    const signInUserId = req.user.id
+    res.redirect(`/users/${signInUserId}`)
   },
   logout: (req, res, next) => {
     req.logout()
