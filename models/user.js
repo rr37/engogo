@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.MissionCard, { foreignKey: 'creatorId' })
       User.hasMany(models.CardCollection, { foreignKey: 'userId' })
       User.hasMany(models.Journal, { foreignKey: 'userId' })
+      User.hasMany(models.Journal, { foreignKey: 'userId', as: 'InProgressJournal' })
       User.belongsToMany(models.User, { 
         through: models.Followship,
         foreignKey: 'followingUserId',

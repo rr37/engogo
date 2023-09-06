@@ -29,6 +29,8 @@
   {{! 中右卡片區 }}
   <div class='col-5 d-flex flex-column align-items-end pe-5'>
     <div class='main-page-badge rounded-pill'>挑戰中</div>
+    {{#if userInProgressJournal}}
+    {{#each userInProgressJournal}}
     <figure
       class='today-mission-card'
       style='width: 280px; height: 100%; border-radius: 25px; overflow: hidden'
@@ -37,25 +39,41 @@
         class='d-flex align-items-center'
         style='position: absolute; width: 280px; padding: 3px 12px'
       >
-        <div style='font-size: 60px; font-weight: bold'>32</div>
+        <div style='font-size: 60px; font-weight: bold'>{{this.MissionCard.id}}</div>
         <div
           style='font-size: 10px; margin-left: 8px'
-        >想出三個你最想收到的生日禮物，挑一個嘗試用英語形容你為什麼喜歡這個禮物。</div>
+        >{{this.MissionCard.Mission.mission}}</div>
       </div>
       <img
-        src='/image/demo_card.png'
+        src='{{this.MissionCard.CardImage.cardImage}}'
         style='object-fit: cover;width:100%;height:100%'
       />
     </figure>
+    {{/each}}
+    {{else}}
+    <div
+      class=' d-flex flex-column align-items-center'
+      style='width: 280px; height: 380px; border-radius: 25px; overflow: hidden; background-color:bisque'
+    >
+    {{#is signInUserId userData.id}}
+      <div class="mt-5">點擊下方+號抽卡！</div>
+      <form action='/users/{{userData.id}}/drawcard' method='POST'>
+        <button type='submit' style="font-size: 8em;margin-top: -0.4em; background:none;border: none">+</button>
+      </form>
+    {{else}}
+    <div class="mt-5">沒有正在進行的挑戰...</div>
+    {{/is}}
+    </div>
+    {{/if}}
   </div>
 </div>
 {{! 中下日記區 }}
 {{!-- 感恩日記本 --}}
-{{#if userJournals}}
+{{#if isUserJournalsPage}}
 {{> userPageJournals}}
 {{/if}}
 {{!-- 牌卡收集庫 --}}
-{{#if userMissionCards}}
+{{#if isUserMissionCardsPage}}
 {{> userPageMissionCards}}
 {{/if}}
 {{#if emptyData}}

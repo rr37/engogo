@@ -7,6 +7,7 @@ const {
   Journal,
 } = require('../models')
 const bcrypt = require('bcryptjs')
+const Sequelize = require('sequelize')
 
 const userController = {
   getUserJournalsPage: (req, res, next) => {
@@ -14,22 +15,59 @@ const userController = {
     User.findByPk(userId, {
       include: [
         {
+          // 找出已完成挑戰的日記跟卡片
           model: Journal,
-          include: [{ model: MissionCard, include: [{ model: CardImage }] }],
+          where: { status: 'done' },
+          include: [
+            { model: MissionCard, include: [{ model: CardImage }] },
+            { model: User },
+          ],
           nest: true,
+          required: false,
+        },
+        {
+          // 找出還在挑戰中日記跟卡片
+          model: Journal,
+          as: 'InProgressJournal',
+          where: { status: 'inProgress' },
+          include: [
+            {
+              model: MissionCard,
+              include: [{ model: CardImage }, { model: Mission }],
+            },
+            { model: User },
+          ],
+          nest: true,
+          required: false,
         },
       ],
       nest: true,
     })
       .then((userData) => {
         // console.log(JSON.stringify(userData, null, 2))
+        const signInUserId = req.user.id
+        let userJournals, userInProgressJournal
         userData = userData.toJSON()
-        const userJournals = userData.Journals
-        let emptyData = false
-        if (!userJournals || userJournals.length === 0) {
-          emptyData = true
+        if (userData.Journals.length !== 0) {
+          userJournals = userData.Journals
         }
-        res.render('userPage', { userData, userJournals, emptyData })
+        if (userData.InProgressJournal.length !== 0) {
+          userInProgressJournal = userData.InProgressJournal
+          userInProgressJournal[0].MissionCard.id =
+            userInProgressJournal[0].MissionCard.id.toString().padStart(2, '0')
+        }
+        let emptyData = true
+        if (userJournals || userInProgressJournal) {
+          emptyData = false
+        }
+        res.render('userPage', {
+          isUserJournalsPage: true,
+          userData,
+          userJournals,
+          userInProgressJournal,
+          emptyData,
+          signInUserId,
+        })
       })
       .catch((err) => next(err))
   },
@@ -38,22 +76,87 @@ const userController = {
     User.findByPk(userId, {
       include: [
         {
+          // 找出已完成挑戰的日記跟卡片
           model: Journal,
           include: [{ model: MissionCard, include: [{ model: CardImage }] }],
           nest: true,
+        },
+        {
+          // 找出還在挑戰中的日記跟卡片
+          model: Journal,
+          as: 'InProgressJournal',
+          where: { status: 'inProgress' },
+          include: [
+            {
+              model: MissionCard,
+              include: [{ model: CardImage }, { model: Mission }],
+            },
+            { model: User },
+          ],
+          nest: true,
+          required: false,
         },
       ],
       nest: true,
     })
       .then((userData) => {
         // console.log(JSON.stringify(userData, null, 2))
+        const signInUserId = req.user.id
         userData = userData.toJSON()
-        const userMissionCards = userData.Journals
-        let emptyData = false
-        if (!userMissionCards || userMissionCards.length === 0) {
-          emptyData = true
+        let userMissionCards, userInProgressJournal
+        if (userData.Journals.length !== 0) {
+          userMissionCards = userData.Journals
         }
-        res.render('userPage', { userData, userMissionCards, emptyData })
+        if (userData.InProgressJournal.length !== 0) {
+          userInProgressJournal = userData.InProgressJournal
+          userInProgressJournal[0].MissionCard.id =
+            userInProgressJournal[0].MissionCard.id.toString().padStart(2, '0')
+        }
+        let emptyData = true
+        if (userMissionCards || userInProgressJournal) {
+          emptyData = false
+        }
+        res.render('userPage', {
+          isUserMissionCardsPage: true,
+          userData,
+          userMissionCards,
+          userInProgressJournal,
+          emptyData,
+          signInUserId,
+        })
+      })
+      .catch((err) => next(err))
+  },
+  drawCard: (req, res, next) => {
+    // 驗證抽卡者是否為本人
+    const signInUserId = req.user.id
+    const userId = req.params.id
+    if (signInUserId.toString() !== userId.toString()) {
+      // 如果不是本人抽卡要給錯誤提示
+      req.flash('error_messages', '不能抽別人的卡！小壞蛋！')
+      return res.redirect('back')
+    }
+    // 如果是本人
+    Promise.all([
+      // 刪除現有的未完成卡片跟日記
+      Journal.destroy({
+        where: { userId: signInUserId, status: 'inProgress' },
+      }),
+      // 隨機給一張卡片
+      MissionCard.findOne({
+        order: Sequelize.literal('RAND()'),
+        attributes: ['id'],
+      }),
+    ])
+      .then(async ([destroyJournal, randomCard]) => {
+        const signInUserId = req.user.id
+        const missionCardId = randomCard.id
+        randomCard = randomCard.toJSON()
+        console.log(randomCard)
+        // 新增新的感恩日記，並設定表格內必填欄位
+        await Journal.create({ userId: signInUserId, missionCardId })
+        // 重新轉址回個人頁面
+        res.redirect(`/users/${signInUserId}`)
       })
       .catch((err) => next(err))
   },

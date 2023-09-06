@@ -1,0 +1,121 @@
+<div class='row' style='margin-top: -200px; margin-bottom: 250px'>
+    <div class='journey'>
+      {{! <h4 class='mb-4'>2023年06月30(五) &nbsp&nbsp 天氣：</h4> }}
+      <h4 class='mb-4'>{{this.date}} &nbsp&nbsp 天氣：{{this.weather}}</h4>
+      <div class='d-flex'>
+        <div class='col-8'>
+          <div class='Q'>
+            <div class='d-flex align-items-start ps-2'>
+              <div
+                class=''
+                style='font-size: 30px; font-weight: 500; color:#f2a025'
+              >Q1</div>
+              <div class='d-flex flex-column justify-content-center ps-2 mt-2'>
+                <div>我在這一張卡牌中做了什麼呢？</div>
+                <div class='mt-1'>{{this.q1}}</div>
+              </div>
+            </div>
+          </div>
+          <div class='Q'>
+            <div class='d-flex align-items-start ps-2'>
+              <div
+                class=''
+                style='font-size: 30px; font-weight: 500; color:#f2a025'
+              >Q2</div>
+              <div class='d-flex flex-column justify-content-center ps-2 mt-2'>
+                <div>完成任務之後，我有什麼感受呢？</div>
+                <div class='mt-1'>{{this.q2}}</div>
+              </div>
+            </div>
+          </div>
+          <div class='Q'>
+            <div class='d-flex align-items-start ps-2'>
+              <div
+                class=''
+                style='font-size: 30px; font-weight: 500; color:#f2a025'
+              >Q3</div>
+              <div class='d-flex flex-column justify-content-center ps-2 mt-2'>
+                <div>我想對＿＿＿＿＿説的一句話...</div>
+                <div class='mt-1'>{{this.q3}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class='col-4 ps-5 pb-2'>
+          <figure
+            class='today-mission-card'
+            style='width: 230px; height: 100%; border-radius: 25px; overflow: hidden'
+          >
+            <div
+              class='d-flex align-items-center'
+              style='position: absolute; width: 230px; padding: 3px 12px'
+            >
+              {{! <div style='font-size: 40px; font-weight: bold'>32</div>
+                    <div
+                      style='font-size: 10px; margin-left: 8px'
+                    >想出三個你最想收到的生日禮物，挑一個嘗試用英語形容你為什麼喜歡這個禮物。</div> }}
+            </div>
+            <img
+              src='{{this.MissionCard.CardImage.cardImage}}'
+              style='object-fit: cover;width:100%;height:100%'
+            />
+          </figure>
+        </div>
+      </div>
+    </div>
+    <div
+      class='d-flex justify-content-between'
+      style='margin-top: -110px; z-index: 11'
+    >
+      <div class='d-flex align-items-end'>
+        {{! 寫日記頭像 }}
+        <figure
+          class='m-0 me-2 flex-shrink-0'
+          style='width: 80px; height: 80px; border-radius: 50%; overflow: hidden;'
+        >
+          <img
+            src='{{this.User.avatar}}'
+            style='object-fit: cover;width:100%;height:100%'
+          />
+        </figure>
+        {{! 日記愛心 }}
+        <figure
+          class='m-0 me-2 flex-shrink-0'
+          style='width: 56px; height: 56px; border-radius: 50%; overflow: hidden; background-color:#FFECC8;
+              display:flex;
+              justify-content: center;
+              align-items: center;'
+        >
+          <img
+            src='/icon/_base/heart.png'
+            style='object-fit: contain;width:60%;height:60%'
+          />
+        </figure>
+        {{! 編輯日記 }}
+        <figure
+          class='m-0 me-2 flex-shrink-0'
+          style='width: 56px; height: 56px; border-radius: 50%; overflow: hidden; background-color:#FFECC8;
+              display:flex;
+              justify-content: center;
+              align-items: center;'
+          data-bs-toggle='modal'
+          data-bs-target='#exampleModal'
+        >
+          <img
+            src='/icon/_base/edit.png'
+            style='object-fit: contain;width:60%;height:60%'
+          />
+        </figure>
+      </div>
+      {{! 能力值 }}
+      <figure
+        class='m-0 me-2 flex-shrink-0'
+        style='width: 130px; height: 130px; overflow: hidden;'
+      >
+        <img
+          src='/image/star.png'
+          style='object-fit: cover;width:100%;height:100%'
+        />
+      </figure>
+    </div>
+  </div>
