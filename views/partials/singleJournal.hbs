@@ -91,6 +91,7 @@
             style='object-fit: contain;width:60%;height:60%'
           />
         </figure>
+        {{#is signInUserId this.User.id}}
         {{! 編輯日記 }}
         <figure
           class='m-0 me-2 flex-shrink-0'
@@ -106,6 +107,7 @@
             style='object-fit: contain;width:60%;height:60%'
           />
         </figure>
+        {{/is}}
       </div>
       {{! 能力值 }}
       <figure

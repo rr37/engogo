@@ -1,8 +1,8 @@
 {{> modal}}
 
 {{#each userInProgressJournal}}
-  {{> singleJournal}}
+  {{> singleJournal signInUserId=../signInUserId}}
 {{/each}}
 {{#each userJournals}}
-  {{> singleJournal}}
+  {{> singleJournal signInUserId=../signInUserId}}
 {{/each}}
