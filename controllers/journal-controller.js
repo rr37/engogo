@@ -18,9 +18,8 @@ const journalController = {
       nest: true,
     })
       .then((journals) => {
-        console.log(journals[0])
-        userData = req.user
-        res.render('explore', { journals, isExplore: true, userData })
+        signInUserId = req.user.id
+        res.render('explore', { journals, isExplore: true, signInUserId })
       })
       .catch((err) => next(err))
   },
