@@ -26,6 +26,8 @@ router.post(
 // users 頁面交給 userController 處理
 router.use('/users',authenticator, users)
 
+router.get('/api/journals/:id', authenticator, journalController.apiGetJournal)
+
 router.get('/logout', userController.logout)
 
 // 首頁：

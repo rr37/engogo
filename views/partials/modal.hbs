@@ -1,7 +1,7 @@
 <!-- Modal -->
 <div
   class='modal fade'
-  id='exampleModal'
+  id='journalModal'
   data-bs-backdrop="static"
   tabindex='-1'
   aria-labelledby='exampleModalLabel'
@@ -23,7 +23,8 @@
         <div
           class='color-white'
           style='text-align:center; font-size:1.7em; font-weight:600'
-        >20230630 &nbsp&nbsp 天氣：</div>
+        >
+        <div id="journalCreatedDate">20230630 &nbsp&nbsp 天氣：</div><input id="weatherInput"></div>
       </div>
       {{!-- 取消＆儲存按鈕 --}}
       <div style='position:absolute;bottom: 2%;right: 3%;'>
@@ -61,8 +62,8 @@
                       style='font-size: 10px; margin-left: 8px'
                     >想出三個你最想收到的生日禮物，挑一個嘗試用英語形容你為什麼喜歡這個禮物。</div> }}
           </div>
-          <img
-            src='/image/demo_card2.png'
+          <img id="cardImageSrc"
+            src=""
             style='object-fit: cover;width:100%;'
           />
         </figure>
@@ -73,18 +74,20 @@
         style='overflow-y: scroll;'
       >
         {{! 問題 }}
-        <div class='Q col-11' style='height: 25vh;'>
-          <div class='d-flex align-items-start ps-2'>
+        {{!-- Q1 --}}
+        <div class='Q col-11' style='min-height: 25vh;'>
+          <div class='d-flex align-items-start ps-2' style="height: 100%">
             <div
               class=''
               style='font-size: 30px; font-weight: 500; color:#f2a025'
             >Q1</div>
-            <div class='d-flex flex-column justify-content-center ps-2 mt-2'>
+            <div class='d-flex flex-column justify-content-center ps-2 mt-2' style="width:100%;height:100%">
               <div>我在這一張卡牌中做了什麼呢？</div>
-              <div class='mt-1'>{{this.q1}}</div>
+              <textarea id="q1TextArea" class='mt-1' style="width: 100%;resize: none;;height:100%;overflow-y: hidden;box-sizing: border-box;">{{this.q1}}</textarea>
             </div>
           </div>
         </div>
+        {{!-- Q2 --}}
         <div class='Q col-11' style='height: 25vh;'>
           <div class='d-flex align-items-start ps-2'>
             <div
@@ -93,10 +96,11 @@
             >Q2</div>
             <div class='d-flex flex-column justify-content-center ps-2 mt-2'>
               <div>完成任務之後，我有什麼感受呢？</div>
-              <div class='mt-1'>{{this.q2}}</div>
+              <textarea id="q2TextArea" class='mt-1' style="width: 100%;resize: none;;height:100%;overflow-y: hidden;box-sizing: border-box;">{{this.q2}}</textarea>
             </div>
           </div>
         </div>
+        {{!-- Q3 --}}
         <div class='Q col-11' style='height: 25vh;'>
           <div class='d-flex align-items-start ps-2'>
             <div
@@ -105,19 +109,7 @@
             >Q3</div>
             <div class='d-flex flex-column justify-content-center ps-2 mt-2'>
               <div>我想對＿＿＿＿＿説的一句話...</div>
-              <div class='mt-1'>{{this.q3}}</div>
-            </div>
-          </div>
-        </div>
-        <div class='Q col-11' style='height: 25vh;'>
-          <div class='d-flex align-items-start ps-2'>
-            <div
-              class=''
-              style='font-size: 30px; font-weight: 500; color:#f2a025'
-            >Q3</div>
-            <div class='d-flex flex-column justify-content-center ps-2 mt-2'>
-              <div>我想對＿＿＿＿＿説的一句話...</div>
-              <div class='mt-1'>{{this.q3}}</div>
+              <textarea id="q3TextArea" class='mt-1' style="width: 100%;resize: none;;height:100%;overflow-y: hidden;box-sizing: border-box;">{{this.q3}}</textarea>
             </div>
           </div>
         </div>

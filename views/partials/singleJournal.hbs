@@ -94,13 +94,14 @@
         {{#is signInUserId this.User.id}}
         {{! 編輯日記 }}
         <figure
-          class='m-0 me-2 flex-shrink-0'
+          class='m-0 me-2 flex-shrink-0 getJournalBtn'
           style='width: 56px; height: 56px; border-radius: 50%; overflow: hidden; background-color:#FFECC8;
               display:flex;
               justify-content: center;
               align-items: center;'
           data-bs-toggle='modal'
-          data-bs-target='#exampleModal'
+          data-bs-target='#journalModal'
+          data-journalid="{{this.id}}"
         >
           <img
             src='/icon/_base/edit.png'
