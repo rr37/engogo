@@ -39,13 +39,7 @@ const journalController = {
           ],
         },
       ],
-      attributes: [
-        'weather',
-        'q1',
-        'q2',
-        'q3',
-        'createdAt'
-      ],
+      attributes: ['weather', 'q1', 'q2', 'q3', 'createdAt'],
       raw: true,
     })
       .then((journal) => {
@@ -55,6 +49,43 @@ const journalController = {
         return res.json(journal)
       })
       .catch((err) => next(err))
+  },
+  postJournal: (req, res, next) => {
+    // 拿到前端資料
+    const { weather, q1, q2, q3 } = req.body
+    const journalId = req.params.id
+    return (
+      Journal.findByPk(journalId)
+        .then((journal) => {
+          const checkJournal = journal.toJSON()
+          const signInUserId = req.user.id
+          // 確認變更者是否為日記擁有者
+          if (checkJournal.userId.toString() !== signInUserId.toString()) {
+            // 若不是要報錯
+            req.flash('error_messages', '不能改別人的日記！小壞蛋！')
+            return res.redirect('back')
+          }
+          // 如果有未填的欄位則不修改狀態
+          if (
+            !weather ||
+            !q1 ||
+            !q2 ||
+            !q3 ||
+            weather.trim() === 0 ||
+            q1.trim() === 0 ||
+            q2.trim() === 0 ||
+            q3.trim() === 0
+          ) {
+            journal.update({ weather, q1, q2, q3 })
+          }
+          // 若資料都填寫完成，將狀態改為已完成
+          // 將前端傳回來的資料寫進 Journal 資料表中
+          return journal.update({ weather, q1, q2, q3,status:'done'})
+        })
+        // 重新導向到該使用者的個人頁面
+        .then(() => res.redirect('back'))
+        .catch((err) => next(err))
+    )
   },
 }
 

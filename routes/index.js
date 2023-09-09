@@ -5,6 +5,7 @@ const passport = require('../config/passport')
 const { authenticator, authenticatedAdmin } = require('../middleware/auth')
 
 const users = require('./modules/users')
+const journals = require('./modules/journals')
 
 const journalController = require('../controllers/journal-controller')
 const userController = require('../controllers/user-controller')
@@ -22,13 +23,16 @@ router.post(
     failureFlash: true,
   }),
   userController.signIn
-)
-// users 頁面交給 userController 處理
-router.use('/users',authenticator, users)
+  )
+  // users 頁面交給 userController 處理
+  router.use('/users',authenticator, users)
+  
+  // journals 頁面交給 journals 處理
+  router.use('/journals', authenticator, journals)
 
-router.get('/api/journals/:id', authenticator, journalController.apiGetJournal)
-
-router.get('/logout', userController.logout)
+  router.get('/api/journals/:id', authenticator, journalController.apiGetJournal)
+  
+  router.get('/logout', userController.logout)
 
 // 首頁：
 router.get('/', (req, res, next) => res.redirect('/explore'))

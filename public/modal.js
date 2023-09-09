@@ -5,6 +5,7 @@ if (getJournalBtn) {
   getJournalBtn.forEach((button) => {
     button.addEventListener('click', () => {
       const journalId = button.dataset.journalid
+      const saveJournalForm = journalModal.querySelector('#saveJournalForm')
       const journalCreatedDate = journalModal.querySelector(
         '#journalCreatedDate'
       )
@@ -17,6 +18,7 @@ if (getJournalBtn) {
         .get(`/api/journals/${journalId}`)
         .then((response) => {
           const { createdAt, weather,cardImage, q1, q2, q3 } = response.data
+          saveJournalForm.action = `/journals/${journalId}`
           journalCreatedDate.innerText = ` ${createdAt} 天氣：`
           weatherInput.value = weather
           cardImageSrc.src = cardImage
