@@ -24,6 +24,26 @@ module.exports = {
       q3: {
         type: Sequelize.STRING,
       },
+      listen: {
+        defaultValue: 3,
+        type: Sequelize.INTEGER,
+      },
+      speak: {
+        defaultValue: 3,
+        type: Sequelize.INTEGER,
+      },
+      read: {
+        defaultValue: 3,
+        type: Sequelize.INTEGER,
+      },
+      write: {
+        defaultValue: 3,
+        type: Sequelize.INTEGER,
+      },
+      think: {
+        defaultValue: 3,
+        type: Sequelize.INTEGER,
+      },
       status: {
         defaultValue: 'inProgress',
         type: Sequelize.STRING,
