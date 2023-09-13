@@ -39,7 +39,18 @@ const journalController = {
           ],
         },
       ],
-      attributes: ['weather', 'q1', 'q2', 'q3', 'createdAt'],
+      attributes: [
+        'weather',
+        'q1',
+        'q2',
+        'q3',
+        'listen',
+        'speak',
+        'read',
+        'write',
+        'think',
+        'createdAt',
+      ],
       raw: true,
     })
       .then((journal) => {
