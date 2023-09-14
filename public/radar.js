@@ -6,6 +6,8 @@ function createRadarChart(canvasId, dataValues, enableDragData = false) {
   }
 
   let ctx = document.getElementById(canvasId).getContext('2d')
+  let hiddenRadarInput =
+    document.getElementById(canvasId).nextElementSibling || null
 
   let data = {
     labels: ['聽', '説', '讀', '寫', '想'],
@@ -95,7 +97,19 @@ function createRadarChart(canvasId, dataValues, enableDragData = false) {
       },
       onDragEnd: (event, datasetIndex, index, value) => {
         event.target.style.cursor = 'default'
-        console.log(radarChart.data.datasets[0].data[0])
+        if (hiddenRadarInput) {
+          const radarChartData = radarChart.data.datasets[0].data
+          let listenInput = hiddenRadarInput.querySelector('#listenInput')
+          let speakInput = hiddenRadarInput.querySelector('#speakInput')
+          let readInput = hiddenRadarInput.querySelector('#readInput')
+          let writeInput = hiddenRadarInput.querySelector('#writeInput')
+          let thinkInput = hiddenRadarInput.querySelector('#thinkInput')
+          listenInput.value = radarChartData[0]
+          speakInput.value = radarChartData[1]
+          readInput.value = radarChartData[2]
+          writeInput.value = radarChartData[3]
+          thinkInput.value = radarChartData[4]
+        }
       },
     }
   }
@@ -107,4 +121,6 @@ function createRadarChart(canvasId, dataValues, enableDragData = false) {
   })
 
   currentRadarChart = radarChart
+
+  return radarChart
 }

@@ -55,7 +55,16 @@
           {{! 能力值 }}
           <div class='col-8'>
             <canvas></canvas>
+            {{! 要回傳後端的能力指標值不渲染 }}
+            <div hidden>
+              <input id='listenInput' name='listen' type='number' />
+              <input id='speakInput' name='speak' type='number' />
+              <input id='readInput' name='read' type='number' />
+              <input id='writeInput' name='write' type='number' />
+              <input id='thinkInput' name='think' type='number' />
+            </div>
           </div>
+
           {{! 卡牌}}
           <figure
             class='today-mission-card col-9'

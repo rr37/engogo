@@ -63,7 +63,7 @@ const journalController = {
   },
   postJournal: (req, res, next) => {
     // 拿到前端資料
-    const { weather, q1, q2, q3 } = req.body
+    const { weather, q1, q2, q3, listen, speak, read, write, think } = req.body
     const journalId = req.params.id
     return (
       Journal.findByPk(journalId)
@@ -87,11 +87,32 @@ const journalController = {
             q2.trim() === 0 ||
             q3.trim() === 0
           ) {
-            journal.update({ weather, q1, q2, q3 })
+            journal.update({
+              weather,
+              q1,
+              q2,
+              q3,
+              listen,
+              speak,
+              read,
+              write,
+              think,
+            })
           }
           // 若資料都填寫完成，將狀態改為已完成
           // 將前端傳回來的資料寫進 Journal 資料表中
-          return journal.update({ weather, q1, q2, q3,status:'done'})
+          return journal.update({
+            weather,
+            q1,
+            q2,
+            q3,
+            listen,
+            speak,
+            read,
+            write,
+            think,
+            status: 'done',
+          })
         })
         // 重新導向到該使用者的個人頁面
         .then(() => res.redirect('back'))
