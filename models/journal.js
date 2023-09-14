@@ -16,20 +16,28 @@ module.exports = (sequelize, DataTypes) => {
       Journal.belongsTo(models.MissionCard, { foreignKey: 'missionCardId' })
     }
   };
-  Journal.init({
-    date: DataTypes.DATE,
-    weather: DataTypes.STRING,
-    q1: DataTypes.STRING,
-    q2: DataTypes.STRING,
-    q3: DataTypes.STRING,
-    status: DataTypes.STRING,
-    userId: DataTypes.INTEGER,
-    missionCardId: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'Journal',
-    tableName: 'Journals',
-    underscored: true,
-  });
+  Journal.init(
+    {
+      date: DataTypes.DATE,
+      weather: DataTypes.STRING,
+      q1: DataTypes.STRING,
+      q2: DataTypes.STRING,
+      q3: DataTypes.STRING,
+      listen: DataTypes.INTEGER,
+      speak: DataTypes.INTEGER,
+      read: DataTypes.INTEGER,
+      write: DataTypes.INTEGER,
+      think: DataTypes.INTEGER,
+      status: DataTypes.STRING,
+      userId: DataTypes.INTEGER,
+      missionCardId: DataTypes.INTEGER,
+    },
+    {
+      sequelize,
+      modelName: 'Journal',
+      tableName: 'Journals',
+      underscored: true,
+    }
+  )
   return Journal;
 };
