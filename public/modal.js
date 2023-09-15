@@ -20,6 +20,9 @@ if (getJournalBtn) {
       const q1TextArea = journalModal.querySelector('#q1TextArea')
       const q2TextArea = journalModal.querySelector('#q2TextArea')
       const q3TextArea = journalModal.querySelector('#q3TextArea')
+      const closeJournalModalBtn = journalModal.querySelector(
+        '#closeJournalModalBtn'
+      )
       axios
         .get(`/api/journals/${journalId}`)
         .then((response) => {
@@ -53,6 +56,9 @@ if (getJournalBtn) {
           const dataValues = [listen, speak, read, write, think]
           const radarChart = createRadarChart(canvasId, dataValues, true)
           radarChart.update()
+          closeJournalModalBtn.addEventListener('click', () => {
+            radarChart.destroy()
+          })
         })
         .catch((err) => {
           console.error('Error during API call:', err)

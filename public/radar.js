@@ -1,9 +1,4 @@
-let currentRadarChart = null
-
 function createRadarChart(canvasId, dataValues, enableDragData = false) {
-  // if (currentRadarChart) {
-  //   currentRadarChart.destroy()
-  // }
 
   let ctx = document.getElementById(canvasId).getContext('2d')
   let hiddenRadarInput =
@@ -120,8 +115,6 @@ function createRadarChart(canvasId, dataValues, enableDragData = false) {
     options: options,
     plugins: [canvasBackgroundColor],
   })
-
-  currentRadarChart = radarChart
 
   return radarChart
 }
