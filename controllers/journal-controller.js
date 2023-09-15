@@ -15,6 +15,8 @@ const journalController = {
         { model: MissionCard, include: [{ model: CardImage }], nest: true },
         { model: User },
       ],
+      where: {status: 'done'},
+      order: [['date', 'DESC']],
       raw: true,
       nest: true,
     })
@@ -87,7 +89,7 @@ const journalController = {
             q2.trim() === 0 ||
             q3.trim() === 0
           ) {
-            journal.update({
+            return journal.update({
               weather,
               q1,
               q2,

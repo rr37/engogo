@@ -41,6 +41,7 @@ const userController = {
           required: false,
         },
       ],
+      order: [[Journal, 'date', 'DESC']],
       nest: true,
     })
       .then((userData) => {
@@ -151,10 +152,11 @@ const userController = {
       .then(async ([destroyJournal, randomCard]) => {
         const signInUserId = req.user.id
         const missionCardId = randomCard.id
+        const date = new Date()
         randomCard = randomCard.toJSON()
         console.log(randomCard)
         // 新增新的感恩日記，並設定表格內必填欄位
-        await Journal.create({ userId: signInUserId, missionCardId })
+        await Journal.create({ userId: signInUserId, missionCardId, date })
         // 重新轉址回個人頁面
         res.redirect(`/users/${signInUserId}`)
       })
