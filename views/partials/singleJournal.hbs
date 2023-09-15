@@ -65,7 +65,7 @@
     </div>
     <div
       class='d-flex justify-content-between'
-      style='margin-top: -110px; z-index: 11'
+      style='margin-top: -130px; z-index: 11'
     >
       <div class='d-flex align-items-end'>
         {{! 寫日記頭像 }}
@@ -111,14 +111,8 @@
         {{/is}}
       </div>
       {{! 能力值 }}
-      <figure
-        class='m-0 me-2 flex-shrink-0'
-        style='width: 130px; height: 130px; overflow: hidden;'
-      >
-        <img
-          src='/image/star.png'
-          style='object-fit: cover;width:100%;height:100%'
-        />
-      </figure>
+      <div class="outSideRadarChart col-2">
+      <canvas id="radar{{this.id}}"  data-values="{{this.listen}}, {{this.speak}},{{this.read}}, {{this.write}},{{this.think}}"></canvas>
+      </div>
     </div>
   </div>

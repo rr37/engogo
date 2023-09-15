@@ -1,9 +1,9 @@
 let currentRadarChart = null
 
 function createRadarChart(canvasId, dataValues, enableDragData = false) {
-  if (currentRadarChart) {
-    currentRadarChart.destroy()
-  }
+  // if (currentRadarChart) {
+  //   currentRadarChart.destroy()
+  // }
 
   let ctx = document.getElementById(canvasId).getContext('2d')
   let hiddenRadarInput =
@@ -73,7 +73,7 @@ function createRadarChart(canvasId, dataValues, enableDragData = false) {
         // 外圈文字大小
         pointLabels: {
           font: {
-            size: 18,
+            size: 0,
           },
         },
         min: 0,
@@ -90,6 +90,7 @@ function createRadarChart(canvasId, dataValues, enableDragData = false) {
   if (enableDragData) {
     data.datasets[0].pointRadius = 5
     data.datasets[0].pointHoverRadius = 10
+    options.scales.r.pointLabels.font.size = 18
     options.plugins.dragData = {
       round: 0,
       onDrag: (event, datasetIndex, index, value) => {
@@ -123,4 +124,15 @@ function createRadarChart(canvasId, dataValues, enableDragData = false) {
   currentRadarChart = radarChart
 
   return radarChart
+}
+
+const radarCharts = document.querySelectorAll('.outSideRadarChart') || null
+if (radarCharts) {
+  radarCharts.forEach(async (radar) => {
+    const canvas = radar.querySelector('canvas')
+    const canvasId = canvas.id
+    const dataValues = canvas.getAttribute("data-values").split(',')
+    const radarChart = createRadarChart(canvasId, dataValues)
+    await radarChart.update()
+  })
 }
