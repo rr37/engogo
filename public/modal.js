@@ -17,12 +17,23 @@ if (getJournalBtn) {
       const writeInput = journalModal.querySelector('#writeInput')
       const thinkInput = journalModal.querySelector('#thinkInput')
       const cardImageSrc = journalModal.querySelector('#cardImageSrc')
+      const qContainers = journalModal.querySelectorAll('.modal-Q')
       const q1TextArea = journalModal.querySelector('#q1TextArea')
       const q2TextArea = journalModal.querySelector('#q2TextArea')
       const q3TextArea = journalModal.querySelector('#q3TextArea')
       const closeJournalModalBtn = journalModal.querySelector(
         '#closeJournalModalBtn'
       )
+      qContainers.forEach((qContainer) => {
+        const innerTextarea = qContainer.querySelector('textarea')
+        qContainer.addEventListener('click', function () {
+          innerTextarea.focus()
+        })
+        innerTextarea.addEventListener('input', () => {
+          innerTextarea.style.height = 'auto'
+          innerTextarea.style.height = innerTextarea.scrollHeight + 'px'
+        })
+      })
       axios
         .get(`/api/journals/${journalId}`)
         .then((response) => {
@@ -59,6 +70,17 @@ if (getJournalBtn) {
           closeJournalModalBtn.addEventListener('click', () => {
             radarChart.destroy()
           })
+        })
+        .then(() => {
+          // 等待一下再更新 innerTextarea 的高度
+          setTimeout(() => {
+            const qContainers = journalModal.querySelectorAll('.modal-Q')
+            qContainers.forEach((qContainer) => {
+              const innerTextarea = qContainer.querySelector('textarea')
+              innerTextarea.style.height = 'auto'
+              innerTextarea.style.height = innerTextarea.scrollHeight + 'px'
+            })
+          }, 300)
         })
         .catch((err) => {
           console.error('Error during API call:', err)
