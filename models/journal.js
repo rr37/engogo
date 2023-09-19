@@ -20,9 +20,9 @@ module.exports = (sequelize, DataTypes) => {
     {
       date: DataTypes.DATE,
       weather: DataTypes.STRING,
-      q1: DataTypes.STRING,
-      q2: DataTypes.STRING,
-      q3: DataTypes.STRING,
+      q1: DataTypes.TEXT,
+      q2: DataTypes.TEXT,
+      q3: DataTypes.TEXT,
       listen: DataTypes.INTEGER,
       speak: DataTypes.INTEGER,
       read: DataTypes.INTEGER,

@@ -16,13 +16,13 @@ module.exports = {
         type: Sequelize.STRING,
       },
       q1: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
       },
       q2: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
       },
       q3: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
       },
       listen: {
         defaultValue: 3,
