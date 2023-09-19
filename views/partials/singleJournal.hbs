@@ -1,6 +1,7 @@
 <div class='row' style='margin-top: -200px; margin-bottom: 250px'>
   <div class='journey'>
-    <h4 class='mb-4'>{{modifyTime this.date}} &nbsp&nbsp 天氣：{{this.weather}}</h4>
+    <h4 class='mb-4'>{{modifyTime this.date}}
+      &nbsp&nbsp 天氣：{{this.weather}}</h4>
     <div class='d-flex'>
       <div class='col-8'>
         <div class='Q'>
@@ -81,7 +82,7 @@
       </a>
       {{! 日記愛心 }}
       <figure
-        class='m-0 me-2 flex-shrink-0'
+        class='m-0 me-2 flex-shrink-0 likeJournalBtn'
         style='width: 56px; height: 56px; border-radius: 50%; overflow: hidden; background-color:#FFECC8;
               display:flex;
               justify-content: center;
@@ -91,6 +92,9 @@
           src='/icon/_base/heart.png'
           style='object-fit: contain;width:60%;height:60%'
         />
+        <form action='/journals/{{this.id}}/like' method='POST'>
+          <button type='submit' style='display: none;'></button>
+        </form>
       </figure>
       {{#is signInUserId this.User.id}}
         {{! 編輯日記 }}

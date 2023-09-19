@@ -5,6 +5,7 @@ const {
   CardCollection,
   User,
   Journal,
+  Like,
 } = require('../models')
 const { sequelize } = require('../models/index')
 const dayjs = require('../helpers/dayjs-helper')
@@ -16,7 +17,7 @@ const journalController = {
         { model: MissionCard, include: [{ model: CardImage }], nest: true },
         { model: User },
       ],
-      where: {status: 'done'},
+      where: { status: 'done' },
       order: [['date', 'DESC']],
       raw: true,
       nest: true,
@@ -58,9 +59,7 @@ const journalController = {
     })
       .then((journal) => {
         journal['cardImage'] = journal['MissionCard.CardImage.cardImage']
-        journal['createdAt'] = dayjs(journal['createdAt']).format(
-          'YYYYMMDD'
-        )
+        journal['createdAt'] = dayjs(journal['createdAt']).format('YYYYMMDD')
         delete journal['MissionCard.CardImage.id']
         delete journal['MissionCard.CardImage.cardImage']
         return res.json(journal)
@@ -124,6 +123,36 @@ const journalController = {
         .then(() => res.redirect('back'))
         .catch((err) => next(err))
     )
+  },
+  postLike: (req, res, next) => {
+    // 拿到要新增 journal id
+    const journalId = req.params.id
+    const userId = req.user.id
+    // 搜尋要被喜歡的 journal 資料
+    Journal.findByPk(journalId, {
+      include: {
+        model: Like,
+        where: { userId },
+        required: false,
+      },
+      attributes: [],
+      raw: true,
+      nest: true,
+    })
+      .then((journal) => {
+        console.log(journal.Likes)
+        if (!journal) throw new Error("Journal doesn't exist!")
+        // 若已存在該筆紀錄則報錯
+        if (journal.Likes.id) throw new Error('You have liked this!')
+        // 將紀錄寫進資料庫
+        Like.create({
+          userId: userId,
+          journalId: journalId,
+        })
+      })
+      // 重新導回頁面
+      .then(() => res.redirect('back'))
+      .catch((err) => next(err))
   },
 }
 
