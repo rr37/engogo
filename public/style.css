@@ -74,6 +74,7 @@ h6 {
 
 .Q {
   height: 33%;
+  max-height: 100px;
   border: 1px dashed #f2a025;
   border-radius: 24px;
   margin-bottom: 2%;
