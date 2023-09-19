@@ -7,6 +7,7 @@ const {
   Journal,
 } = require('../models')
 const { sequelize } = require('../models/index')
+const dayjs = require('../helpers/dayjs-helper')
 
 const journalController = {
   getJournals: (req, res, next) => {
@@ -57,6 +58,9 @@ const journalController = {
     })
       .then((journal) => {
         journal['cardImage'] = journal['MissionCard.CardImage.cardImage']
+        journal['createdAt'] = dayjs(journal['createdAt']).format(
+          'YYYYMMDD'
+        )
         delete journal['MissionCard.CardImage.id']
         delete journal['MissionCard.CardImage.cardImage']
         return res.json(journal)

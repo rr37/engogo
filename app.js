@@ -6,7 +6,7 @@ const app = express()
 // 引用 hbs
 const exphbs = require('express-handlebars')
 // 引用 helpers
-const helpers = require('handlebars-helpers')()
+const hbshelpers = require('./helpers/handlebars-helpers')
 const session = require('express-session')
 const flash = require('connect-flash')
 
@@ -17,7 +17,7 @@ app.use(express.static('public'))
 app.engine(
   'hbs',
   exphbs({
-    helpers: helpers,
+    helpers: hbshelpers,
     defaultLayout: 'main',
     extname: '.hbs',
   })
