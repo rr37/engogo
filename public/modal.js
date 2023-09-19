@@ -51,7 +51,7 @@ if (getJournalBtn) {
             think,
           } = response.data
           saveJournalForm.action = `/journals/${journalId}`
-          journalCreatedDate.innerText = ` ${createdAt} 天氣：`
+          journalCreatedDate.innerHTML = ` ${createdAt} &nbsp&nbsp 天氣：`
           weatherInput.value = weather
           canvas.id = `radarChart${journalId}`
           listenInput.value = listen
