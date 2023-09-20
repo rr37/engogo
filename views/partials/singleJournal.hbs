@@ -82,17 +82,30 @@
       </a>
       {{! 日記愛心 }}
       <figure
-        class='m-0 me-2 flex-shrink-0 likeJournalBtn'
-        style='width: 56px; height: 56px; border-radius: 50%; overflow: hidden; background-color:#FFECC8;
+        class='m-0 me-2 flex-shrink-0 likeJournalBtn position-relative'
+        style='width: 56px; height: 56px; border-radius: 50%; background-color:#FFECC8;
               display:flex;
               justify-content: center;
               align-items: center;'
       >
+        <span class="position-absolute translate-middle badge rounded-pill" style="background-color: #fff; color: #F2A025; top: 10%; left: 90%;box-shadow:0px 0px 4px 0px #cccccc;" >
+          {{this.Likes}}
+          <span class="visually-hidden">unread messages</span>
+        </span>
+        {{#if this.isLiked}}
         <img
           src='/icon/_base/heart.png'
           style='object-fit: contain;width:60%;height:60%'
         />
+        <form action='/journals/{{this.id}}/unlike' method='POST'>
+        {{else}}
+        <img
+          src='/icon/_base/white_heart.png'
+          style='object-fit: contain;width:60%;height:60%'
+        />
         <form action='/journals/{{this.id}}/like' method='POST'>
+        {{/if}}
+        
           <button type='submit' style='display: none;'></button>
         </form>
       </figure>

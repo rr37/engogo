@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Journal.hasMany(models.Like, { foreignKey: 'journalId' })
+      Journal.hasMany(models.Like, { foreignKey: 'journalId' , as: 'isLiked' })
       Journal.belongsTo(models.User, { foreignKey: 'userId' })
       Journal.belongsTo(models.MissionCard, { foreignKey: 'missionCardId' })
     }

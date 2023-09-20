@@ -16,15 +16,26 @@ const journalController = {
       include: [
         { model: MissionCard, include: [{ model: CardImage }], nest: true },
         { model: User },
+        { model: Like, required: false },
+        { model: Like, as: 'isLiked', where: { userId: req.user.id }, required: false },
       ],
       where: { status: 'done' },
       order: [['date', 'DESC']],
-      raw: true,
       nest: true,
     })
       .then((journals) => {
+        // console.log(JSON.stringify(journals, null, 2))
         signInUserId = req.user.id
-        res.render('explore', { journals, isExplore: true, signInUserId })
+        journals = journals.map((journal) => ({
+          ...journal.toJSON(),
+          Likes: journal.Likes.length > 0 ? journal.Likes.length : 0,
+          isLiked: journal.isLiked.length > 0 ? true : false,
+        }))
+        res.render('explore', {
+          journals,
+          isExplore: true,
+          signInUserId,
+        })
       })
       .catch((err) => next(err))
   },
@@ -66,6 +77,7 @@ const journalController = {
       })
       .catch((err) => next(err))
   },
+  // 更改 journal 資料
   postJournal: (req, res, next) => {
     // 拿到前端資料
     const { weather, q1, q2, q3, listen, speak, read, write, think } = req.body

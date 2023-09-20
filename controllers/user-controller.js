@@ -5,6 +5,7 @@ const {
   CardCollection,
   User,
   Journal,
+  Like,
 } = require('../models')
 const bcrypt = require('bcryptjs')
 const Sequelize = require('sequelize')
@@ -21,6 +22,13 @@ const userController = {
           include: [
             { model: MissionCard, include: [{ model: CardImage }] },
             { model: User },
+            { model: Like, required: false },
+            {
+              model: Like,
+              as: 'isLiked',
+              where: { userId: req.user.id },
+              required: false,
+            },
           ],
           nest: true,
           required: false,
@@ -36,6 +44,13 @@ const userController = {
               include: [{ model: CardImage }, { model: Mission }],
             },
             { model: User },
+            { model: Like, required: false },
+            {
+              model: Like,
+              as: 'isLiked',
+              where: { userId: req.user.id },
+              required: false,
+            },
           ],
           nest: true,
           required: false,
@@ -47,20 +62,31 @@ const userController = {
       .then((userData) => {
         // console.log(JSON.stringify(userData, null, 2))
         const signInUserId = req.user.id
-        let userJournals, userInProgressJournal
         userData = userData.toJSON()
-        if (userData.Journals.length !== 0) {
-          userJournals = userData.Journals
+        const { Journals, InProgressJournal } = userData
+
+        const transformJournal = (journal) => ({
+          ...journal,
+          Likes: journal.Likes.length > 0 ? journal.Likes.length : 0,
+          isLiked: journal.isLiked.length > 0,
+        })
+
+        let userJournals = []
+        let userInProgressJournal = []
+
+        if (Journals.length > 0) {
+          userJournals = Journals.map(transformJournal)
         }
-        if (userData.InProgressJournal.length !== 0) {
-          userInProgressJournal = userData.InProgressJournal
-          userInProgressJournal[0].MissionCard.id =
-            userInProgressJournal[0].MissionCard.id.toString().padStart(2, '0')
+
+        if (InProgressJournal.length > 0) {
+          const firstInProgressJournal = InProgressJournal[0]
+          firstInProgressJournal.MissionCard.id =
+            firstInProgressJournal.MissionCard.id.toString().padStart(2, '0')
+          userInProgressJournal = InProgressJournal.map(transformJournal)
         }
-        let emptyData = true
-        if (userJournals || userInProgressJournal) {
-          emptyData = false
-        }
+
+        const emptyData = !userJournals && !userInProgressJournal
+
         res.render('userPage', {
           isUserJournalsPage: true,
           userData,
