@@ -17,7 +17,12 @@ const journalController = {
         { model: MissionCard, include: [{ model: CardImage }], nest: true },
         { model: User },
         { model: Like, required: false },
-        { model: Like, as: 'isLiked', where: { userId: req.user.id }, required: false },
+        {
+          model: Like,
+          as: 'isLiked',
+          where: { userId: req.user.id },
+          required: false,
+        },
       ],
       where: { status: 'done' },
       order: [['date', 'DESC']],
@@ -152,7 +157,6 @@ const journalController = {
       nest: true,
     })
       .then((journal) => {
-        console.log(journal.Likes)
         if (!journal) throw new Error("Journal doesn't exist!")
         // 若已存在該筆紀錄則報錯
         if (journal.Likes.id) throw new Error('You have liked this!')
@@ -161,6 +165,33 @@ const journalController = {
           userId: userId,
           journalId: journalId,
         })
+      })
+      // 重新導回頁面
+      .then(() => res.redirect('back'))
+      .catch((err) => next(err))
+  },
+  postUnlike: (req, res, next) => {
+    // 拿到要取消喜歡的 journal id
+    const journalId = req.params.id
+    const userId = req.user.id
+
+    // 搜尋要被喜歡的 journal 資料
+    Journal.findByPk(journalId, {
+      include: {
+        model: Like,
+        where: { userId },
+        required: false,
+      },
+      attributes: [],
+      nest: true,
+    })
+      .then((journal) => {
+        const like = journal.Likes[0]
+        if (!journal) throw new Error("Journal doesn't exist!")
+        // 若未存在該筆紀錄則報錯
+        if (!like) throw new Error('You have not liked this!')
+        // 將紀錄從資料庫刪除
+        like.destroy()
       })
       // 重新導回頁面
       .then(() => res.redirect('back'))
