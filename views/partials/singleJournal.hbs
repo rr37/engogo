@@ -71,7 +71,7 @@
       {{! 寫日記頭像 }}
       <a href='/users/{{this.User.id}}'>
         <figure
-          class='m-0 me-2 flex-shrink-0'
+          class='m-0 flex-shrink-0'
           style='width: 80px; height: 80px; border-radius: 50%; overflow: hidden;'
         >
           <img
@@ -82,7 +82,7 @@
       </a>
       {{! 日記愛心 }}
       <figure
-        class='m-0 me-2 flex-shrink-0 likeJournalBtn position-relative'
+        class='m-0 ms-2 me-2 flex-shrink-0 likeJournalBtn position-relative pointer'
         style='width: 56px; height: 56px; border-radius: 50%; background-color:#FFECC8;
               display:flex;
               justify-content: center;
@@ -112,7 +112,7 @@
       {{#is signInUserId this.User.id}}
         {{! 編輯日記 }}
         <figure
-          class='m-0 me-2 flex-shrink-0 getJournalBtn'
+          class='m-0 me-2 flex-shrink-0 getJournalBtn pointer'
           style='width: 56px; height: 56px; border-radius: 50%; overflow: hidden; background-color:#FFECC8;
               display:flex;
               justify-content: center;

@@ -111,3 +111,7 @@ textarea {
   box-sizing: border-box;
   display: block;
 }
+
+.pointer {
+  cursor: pointer;
+}
