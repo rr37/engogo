@@ -20,7 +20,10 @@ const userController = {
           model: Journal,
           where: { status: 'done' },
           include: [
-            { model: MissionCard, include: [{ model: CardImage }] },
+            {
+              model: MissionCard,
+              include: [{ model: CardImage }, { model: Mission }],
+            },
             { model: User },
             { model: Like, required: false },
             {
@@ -67,6 +70,12 @@ const userController = {
 
         const transformJournal = (journal) => ({
           ...journal,
+          MissionCard: {
+            ...journal.MissionCard,
+            id: (journal.MissionCard.id.toString().length === 1
+              ? journal.MissionCard.id.toString().padStart(2, '0')
+              : journal.MissionCard.id)
+          },
           Likes: journal.Likes.length > 0 ? journal.Likes.length : 0,
           isLiked: journal.isLiked.length > 0,
         })

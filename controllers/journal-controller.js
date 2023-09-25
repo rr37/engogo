@@ -14,7 +14,11 @@ const journalController = {
   getJournals: (req, res, next) => {
     Journal.findAll({
       include: [
-        { model: MissionCard, include: [{ model: CardImage }], nest: true },
+        {
+          model: MissionCard,
+          include: [{ model: CardImage }, { model: Mission }],
+          nest: true,
+        },
         { model: User },
         { model: Like, required: false },
         {
@@ -33,6 +37,13 @@ const journalController = {
         signInUserId = req.user.id
         journals = journals.map((journal) => ({
           ...journal.toJSON(),
+          MissionCard: {
+            ...journal.toJSON().MissionCard,
+            id:
+              journal.MissionCard.id.toString().length === 1
+                ? journal.MissionCard.id.toString().padStart(2, '0')
+                : journal.MissionCard.id,
+          },
           Likes: journal.Likes.length > 0 ? journal.Likes.length : 0,
           isLiked: journal.isLiked.length > 0 ? true : false,
         }))

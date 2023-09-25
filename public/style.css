@@ -115,3 +115,28 @@ textarea {
 .pointer {
   cursor: pointer;
 }
+
+.journal-card {
+  cursor: pointer;
+  transition-duration: 0.1s;
+  transition-timing-function: ease-in-out;
+}
+
+.journal-card:hover {
+  transform: translateY(-5px);
+  .card-info {
+    opacity: 1;
+    visibility: visible;
+    z-index: 5;
+  }
+}
+
+.card-info {
+  position: absolute;
+  width: 230px;
+  padding: 5px 12px 50px 12px;
+  opacity: 0;
+  background: linear-gradient(#ffffff, 75%, #ffffff00);
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+}

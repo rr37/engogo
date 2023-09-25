@@ -4,6 +4,7 @@
       &nbsp&nbsp 天氣：{{this.weather}}</h4>
     <div class='d-flex'>
       <div class='col-8'>
+        {{!-- Q1 --}}
         <div class='Q'>
           <div class='d-flex align-items-start ps-2'>
             <div
@@ -16,6 +17,7 @@
             </div>
           </div>
         </div>
+        {{!-- Q2 --}}
         <div class='Q'>
           <div class='d-flex align-items-start ps-2'>
             <div
@@ -28,6 +30,7 @@
             </div>
           </div>
         </div>
+        {{!-- Q3 --}}
         <div class='Q'>
           <div class='d-flex align-items-start ps-2'>
             <div
@@ -41,19 +44,18 @@
           </div>
         </div>
       </div>
+      {{!-- Mission Card --}}
       <div class='col-4 ps-5 pb-2'>
         <figure
-          class='today-mission-card'
+          class='journal-card'
           style='width: 230px; height: 100%; border-radius: 25px; overflow: hidden'
         >
           <div
-            class='d-flex align-items-center'
-            style='position: absolute; width: 230px; padding: 3px 12px'
+            class='d-flex align-items-center card-info'
           >
-            {{! <div style='font-size: 40px; font-weight: bold'>32</div>
-                    <div
-                      style='font-size: 10px; margin-left: 8px'
-                    >想出三個你最想收到的生日禮物，挑一個嘗試用英語形容你為什麼喜歡這個禮物。</div> }}
+            <div style='font-size: 40px; font-weight: bold'>{{this.MissionCard.id}}</div>
+            <div style='font-size: 10px; margin-left: 8px'
+                    >{{this.MissionCard.Mission.mission}}</div>
           </div>
           <img
             src='{{this.MissionCard.CardImage.cardImage}}'
@@ -63,11 +65,12 @@
       </div>
     </div>
   </div>
+  {{!-- 下排資訊 --}}
   <div
     class='d-flex justify-content-between align-items-end'
-    style='margin-top: -14%; z-index: 11'
+    style='margin-top: -14%; z-index: 11;pointer-events: none;'
   >
-    <div class='d-flex align-items-end'>
+    <div class='d-flex align-items-end' style="pointer-events: auto;">
       {{! 寫日記頭像 }}
       <a href='/users/{{this.User.id}}'>
         <figure
