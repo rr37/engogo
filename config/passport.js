@@ -15,10 +15,20 @@ passport.use('local', new LocalStrategy(
   (req, account, password, cb) => {
     User.findOne({ where: { account, role: 'user' } })
       .then(user => {
-        if (!user) return cb(null, false, req.flash('error_messages', '帳號不存在！'))
+        if (!user) return cb(
+          null,
+          false,
+          req.flash('error_messages', '帳號不存在！'),
+          req.flash('account', account)
+        )
         return bcrypt.compare(password, user.password).then(isMatch => {
           if (!isMatch) {
-            return cb(null, false, req.flash('error_messages', '帳號不存在！'))
+            return cb(
+              null,
+              false,
+              req.flash('error_messages', '帳號不存在！'),
+              req.flash('account', account)
+            )
           }
           return cb(null, user)
         })

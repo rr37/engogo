@@ -95,7 +95,7 @@ const userController = {
         }
 
         const emptyData = !userJournals && !userInProgressJournal
-
+        
         res.render('userPage', {
           isUserJournalsPage: true,
           userData,
@@ -253,13 +253,20 @@ const userController = {
         )
         .then(() => {
           req.flash('success_messages', '成功註冊帳號。')
-          res.redirect('/signin')
+          res.render('signin', {
+            account,
+            password,
+            layout: 'signIn&Up',
+            success_messages: req.flash('success_messages'),
+          })
         })
         .catch((err) => next(err))
     })
   },
   signInPage: (req, res, next) => {
-    res.render('signIn', { layout: 'signIn&Up' })
+    const account = req.flash('account')[0]
+    console.log(account)
+    res.render('signIn', { layout: 'signIn&Up', account })
   },
   signIn: (req, res, next) => {
     const signInUserId = req.user.id

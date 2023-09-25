@@ -19,20 +19,20 @@ router.get('/signin', userController.signInPage)
 router.post(
   '/signin',
   passport.authenticate('local', {
-    failureRedirect: '/signup',
+    failureRedirect: '/signin',
     failureFlash: true,
   }),
   userController.signIn
-  )
-  // users 頁面交給 userController 處理
-  router.use('/users',authenticator, users)
-  
-  // journals 頁面交給 journals 處理
-  router.use('/journals', authenticator, journals)
+)
+// users 頁面交給 userController 處理
+router.use('/users', authenticator, users)
 
-  router.get('/api/journals/:id', authenticator, journalController.apiGetJournal)
-  
-  router.get('/logout', userController.logout)
+// journals 頁面交給 journals 處理
+router.use('/journals', authenticator, journals)
+
+router.get('/api/journals/:id', authenticator, journalController.apiGetJournal)
+
+router.get('/logout', userController.logout)
 
 // 首頁：
 router.get('/', (req, res, next) => res.redirect('/explore'))
