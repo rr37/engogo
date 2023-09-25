@@ -94,7 +94,9 @@ const userController = {
           userInProgressJournal = InProgressJournal.map(transformJournal)
         }
 
-        const emptyData = !userJournals && !userInProgressJournal
+        const emptyData =
+          userJournals.length === 0 && userInProgressJournal.length === 0
+        console.log(emptyData)
         
         res.render('userPage', {
           isUserJournalsPage: true,
