@@ -9,6 +9,7 @@ const exphbs = require('express-handlebars')
 const hbshelpers = require('./helpers/handlebars-helpers')
 const session = require('express-session')
 const flash = require('connect-flash')
+const redisStore = require('./config/redis')
 
 const routes = require('./routes')
 const passport = require('./config/passport')
@@ -36,6 +37,7 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use(
   session({
+    store: redisStore,
     secret: process.env.SESSION_SECRET || 'ThisMySecret',
     resave: false,
     saveUninitialized: false,

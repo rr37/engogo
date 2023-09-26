@@ -72,9 +72,10 @@ const userController = {
           ...journal,
           MissionCard: {
             ...journal.MissionCard,
-            id: (journal.MissionCard.id.toString().length === 1
-              ? journal.MissionCard.id.toString().padStart(2, '0')
-              : journal.MissionCard.id)
+            id:
+              journal.MissionCard.id.toString().length === 1
+                ? journal.MissionCard.id.toString().padStart(2, '0')
+                : journal.MissionCard.id,
           },
           Likes: journal.Likes.length > 0 ? journal.Likes.length : 0,
           isLiked: journal.isLiked.length > 0,
@@ -97,7 +98,7 @@ const userController = {
         const emptyData =
           userJournals.length === 0 && userInProgressJournal.length === 0
         console.log(emptyData)
-        
+
         res.render('userPage', {
           isUserJournalsPage: true,
           userData,
@@ -266,8 +267,8 @@ const userController = {
     })
   },
   signInPage: (req, res, next) => {
-    const account = req.flash('account')[0]
-    console.log(account)
+    const account = req.flash('account')[0] || null
+    console.log(`account: ${account}`)
     res.render('signIn', { layout: 'signIn&Up', account })
   },
   signIn: (req, res, next) => {
