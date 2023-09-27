@@ -213,7 +213,7 @@ const userController = {
       errors.push({ message: '密碼與確認密碼不一致。' })
     }
     if (errors.length) {
-      return res.render('signup', {
+      return res.render('signUp', {
         errors,
         account,
         name,
@@ -234,7 +234,7 @@ const userController = {
         errors.push({ message: '帳號已被使用！' })
       }
       if (errors.length) {
-        return res.render('signup', {
+        return res.render('signUp', {
           errors,
           account,
           name,
@@ -256,7 +256,7 @@ const userController = {
         )
         .then(() => {
           req.flash('success_messages', '成功註冊帳號。')
-          res.render('signin', {
+          res.render('signIn', {
             account,
             password,
             layout: 'signIn&Up',
