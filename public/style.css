@@ -140,3 +140,46 @@ textarea {
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
 }
+
+.modal-card {
+  position: relative;
+  border-radius: 25px;
+  cursor: pointer;
+  overflow: hidden;
+  margin-top: 10%;
+  margin-bottom: -30%;
+  transition-duration: 0.1s;
+  transition-timing-function: ease-in-out;
+}
+
+.modal-card:hover {
+  transform: translateY(-33%);
+  .modal-card-info {
+    opacity: 1;
+    z-index: 5;
+  }
+}
+
+.modal-card-info {
+  position: absolute;
+  width: 100%;
+  padding: 5px 12px 50px 12px;
+  z-index: 5;
+  opacity: 0;
+  background: linear-gradient(#ffffff, 75%, #ffffff00);
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+}
+
+.modal-card-id {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.modal-card-mission {
+  width: 83.33333333%;
+  font-size: 10px;
+  margin-left: 10px;
+  word-wrap: break-word;
+  flex-shrink: 1;
+}

@@ -16,6 +16,8 @@ if (getJournalBtn) {
       const readInput = journalModal.querySelector('#readInput')
       const writeInput = journalModal.querySelector('#writeInput')
       const thinkInput = journalModal.querySelector('#thinkInput')
+      const cardIdText = journalModal.querySelector('#cardId')
+      const cardMissionText = journalModal.querySelector('#cardMission')
       const cardImageSrc = journalModal.querySelector('#cardImageSrc')
       const qContainers = journalModal.querySelectorAll('.modal-Q')
       const q1TextArea = journalModal.querySelector('#q1TextArea')
@@ -40,6 +42,8 @@ if (getJournalBtn) {
           const {
             createdAt,
             weather,
+            cardId,
+            cardMission,
             cardImage,
             q1,
             q2,
@@ -59,6 +63,8 @@ if (getJournalBtn) {
           readInput.value = read
           writeInput.value = write
           thinkInput.value = think
+          cardIdText.innerText = cardId
+          cardMissionText.innerText = cardMission
           cardImageSrc.src = cardImage
           q1TextArea.value = q1
           q2TextArea.value = q2

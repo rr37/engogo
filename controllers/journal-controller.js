@@ -61,11 +61,15 @@ const journalController = {
       include: [
         {
           model: MissionCard,
-          attributes: [],
+          attributes: ['id'],
           include: [
             {
               model: CardImage,
               attributes: ['cardImage'],
+            },
+            {
+              model: Mission,
+              attributes: ['mission'],
             },
           ],
         },
@@ -85,8 +89,21 @@ const journalController = {
       raw: true,
     })
       .then((journal) => {
-        journal['cardImage'] = journal['MissionCard.CardImage.cardImage']
-        journal['createdAt'] = dayjs(journal['createdAt']).format('YYYYMMDD')
+        const {
+          'MissionCard.id': cardId,
+          'MissionCard.Mission.mission': cardMission,
+          'MissionCard.CardImage.cardImage': cardImage,
+          createdAt,
+        } = journal
+
+        journal.cardId = String(cardId).padStart(2, '0')
+        journal.cardMission = cardMission
+        journal.cardImage = cardImage
+        journal.createdAt = dayjs(createdAt).format('YYYYMMDD')
+
+        delete journal['MissionCard.id']
+        delete journal['MissionCard.Mission.id']
+        delete journal['MissionCard.Mission.mission']
         delete journal['MissionCard.CardImage.id']
         delete journal['MissionCard.CardImage.cardImage']
         return res.json(journal)

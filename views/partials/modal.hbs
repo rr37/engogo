@@ -66,18 +66,10 @@
           </div>
 
           {{! 卡牌}}
-          <figure
-            class='today-mission-card col-9'
-            style='border-radius: 25px; overflow: hidden'
-          >
-            <div
-              class='d-flex align-items-center'
-              style='position: absolute; width: 230px; padding: 3px 12px'
-            >
-              {{! <div style='font-size: 40px; font-weight: bold'>32</div>
-                    <div
-                      style='font-size: 10px; margin-left: 8px'
-                    >想出三個你最想收到的生日禮物，挑一個嘗試用英語形容你為什麼喜歡這個禮物。</div> }}
+          <figure class='modal-card col-9'>
+            <div class='d-flex align-items-center modal-card-info'>
+              <div id='cardId' class='modal-card-id'></div>
+              <div id='cardMission' class='modal-card-mission'></div>
             </div>
             <img
               id='cardImageSrc'
@@ -107,7 +99,7 @@
                   id='q1TextArea'
                   class='mt-1 modal-textarea'
                   name='q1'
-                  placeholder="我做了......"
+                  placeholder='我做了......'
                 ></textarea>
               </div>
             </div>
@@ -118,13 +110,16 @@
               <div
                 style='font-size: 30px; font-weight: 500; color:#f2a025'
               >Q2</div>
-              <div class='d-flex flex-column justify-content-center ps-2 mt-2'style='width:100%;height:100%'>
+              <div
+                class='d-flex flex-column justify-content-center ps-2 mt-2'
+                style='width:100%;height:100%'
+              >
                 <div>完成任務之後，我有什麼感受呢？</div>
                 <textarea
                   id='q2TextArea'
                   name='q2'
                   class='mt-1 modal-textarea'
-                  placeholder="我覺得......"
+                  placeholder='我覺得......'
                 ></textarea>
               </div>
             </div>
@@ -135,13 +130,16 @@
               <div
                 style='font-size: 30px; font-weight: 500; color:#f2a025'
               >Q3</div>
-              <div class='d-flex flex-column justify-content-center ps-2 mt-2'style='width:100%;height:100%'>
+              <div
+                class='d-flex flex-column justify-content-center ps-2 mt-2'
+                style='width:100%;height:100%'
+              >
                 <div>我想對＿＿＿＿＿説的一句話...</div>
                 <textarea
                   id='q3TextArea'
                   name='q3'
                   class='mt-1 modal-textarea'
-                  placeholder="我想對...説..."
+                  placeholder='我想對...説...'
                 ></textarea>
               </div>
             </div>
