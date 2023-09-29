@@ -169,7 +169,31 @@ const journalController = {
         .catch((err) => next(err))
     )
   },
-  postLike: (req, res, next) => {
+  apiCheckJournalLike: async (req, res, next) => {
+    // 拿到要新增 journal id
+    const journalId = req.params.id
+    const userId = req.user.id
+    try {
+      // 查詢是否已按愛心
+      const like = await Like.findOne({
+        where: {
+          userId,
+          journalId,
+        },
+      })
+
+      // 如果已按愛心，返回 { alreadyLiked: true }
+      // 如果未按愛心，返回 { alreadyLiked: false }
+      if (like) {
+        res.json({ alreadyLiked: true })
+      } else {
+        res.json({ alreadyLiked: false })
+      }
+    } catch (error) {
+      next(error)
+    }
+  },
+  apiLikeJournal: (req, res, next) => {
     // 拿到要新增 journal id
     const journalId = req.params.id
     const userId = req.user.id
@@ -189,20 +213,29 @@ const journalController = {
         // 若已存在該筆紀錄則報錯
         if (journal.Likes.id) throw new Error('You have liked this!')
         // 將紀錄寫進資料庫
-        Like.create({
+        return Like.create({
           userId: userId,
           journalId: journalId,
         })
       })
+      .then(() => {
+        // 更新日記的愛心數量
+        return Like.count({
+          where: {
+            journalId,
+          },
+        })
+      })
       // 重新導回頁面
-      .then(() => res.redirect('back'))
+      .then((likeCount) => {
+        res.json({likeCount})
+      })
       .catch((err) => next(err))
   },
-  postUnlike: (req, res, next) => {
+  apiUnLikeJournal: (req, res, next) => {
     // 拿到要取消喜歡的 journal id
     const journalId = req.params.id
     const userId = req.user.id
-
     // 搜尋要被喜歡的 journal 資料
     Journal.findByPk(journalId, {
       include: {
@@ -219,10 +252,20 @@ const journalController = {
         // 若未存在該筆紀錄則報錯
         if (!like) throw new Error('You have not liked this!')
         // 將紀錄從資料庫刪除
-        like.destroy()
+        return like.destroy()
+      })
+      .then(() => {
+        // 更新日記的愛心數量
+        return Like.count({
+          where: {
+            journalId,
+          },
+        })
       })
       // 重新導回頁面
-      .then(() => res.redirect('back'))
+      .then((likeCount) => {
+        res.json({likeCount})
+      })
       .catch((err) => next(err))
   },
 }

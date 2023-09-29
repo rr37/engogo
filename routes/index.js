@@ -31,6 +31,20 @@ router.use('/users', authenticator, users)
 router.use('/journals', authenticator, journals)
 
 router.get('/api/journals/:id', authenticator, journalController.apiGetJournal)
+// 檢查是否有對 journal 表示喜歡
+router.get('/api/journals/:id/checkLike', authenticator, journalController.apiCheckJournalLike)
+// 對 journal 表示喜歡
+router.post(
+  '/api/journals/:id/like',
+  authenticator,
+  journalController.apiLikeJournal
+)
+// 對 journal 取消喜歡
+router.delete(
+  '/api/journals/:id/unLike',
+  authenticator,
+  journalController.apiUnLikeJournal
+)
 
 router.get('/logout', userController.logout)
 
