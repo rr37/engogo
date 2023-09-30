@@ -9,7 +9,8 @@ if (getJournalBtn) {
       const journalCreatedDate = journalModal.querySelector(
         '#journalCreatedDate'
       )
-      const weatherInput = journalModal.querySelector('#weatherInput')
+      const weatherSelect = journalModal.querySelector('#weatherSelect')
+      const weatherOptions = weatherSelect.querySelectorAll('option')
       const canvas = journalModal.querySelector('canvas')
       const listenInput = journalModal.querySelector('#listenInput')
       const speakInput = journalModal.querySelector('#speakInput')
@@ -55,8 +56,14 @@ if (getJournalBtn) {
             think,
           } = response.data
           saveJournalForm.action = `/journals/${journalId}`
-          journalCreatedDate.innerHTML = ` ${createdAt} &nbsp&nbsp 天氣：`
-          weatherInput.value = weather
+          journalCreatedDate.innerHTML = `${createdAt}`
+          weatherOptions.forEach((option) => {
+            option.selected = false
+            if (option.value === weather){
+              option.selected = true
+            }
+          })
+
           canvas.id = `radarChart${journalId}`
           listenInput.value = listen
           speakInput.value = speak
