@@ -34,7 +34,7 @@ const journalController = {
     })
       .then((journals) => {
         // console.log(JSON.stringify(journals, null, 2))
-        signInUserId = req.user.id
+        const signInUserId = req.user.id
         journals = journals.map((journal) => ({
           ...journal.toJSON(),
           MissionCard: {
@@ -57,6 +57,7 @@ const journalController = {
   },
   apiGetJournal: (req, res, next) => {
     const journalId = req.params.id
+    const signInUserId = req.user.id
     Journal.findByPk(journalId, {
       include: [
         {
@@ -75,6 +76,7 @@ const journalController = {
         },
       ],
       attributes: [
+        'userId',
         'weather',
         'q1',
         'q2',
@@ -90,17 +92,19 @@ const journalController = {
     })
       .then((journal) => {
         const {
+          userId,
           'MissionCard.id': cardId,
           'MissionCard.Mission.mission': cardMission,
           'MissionCard.CardImage.cardImage': cardImage,
           createdAt,
         } = journal
-
+        journal.editable = userId === signInUserId ? true : false
         journal.cardId = String(cardId).padStart(2, '0')
         journal.cardMission = cardMission
         journal.cardImage = cardImage
         journal.createdAt = dayjs(createdAt).format('YYYYMMDD')
 
+        delete journal['userId']
         delete journal['MissionCard.id']
         delete journal['MissionCard.Mission.id']
         delete journal['MissionCard.Mission.mission']
@@ -228,7 +232,7 @@ const journalController = {
       })
       // 重新導回頁面
       .then((likeCount) => {
-        res.json({likeCount})
+        res.json({ likeCount })
       })
       .catch((err) => next(err))
   },
@@ -264,7 +268,7 @@ const journalController = {
       })
       // 重新導回頁面
       .then((likeCount) => {
-        res.json({likeCount})
+        res.json({ likeCount })
       })
       .catch((err) => next(err))
   },

@@ -27,6 +27,7 @@ if (getJournalBtn) {
       const closeJournalModalBtn = journalModal.querySelector(
         '#closeJournalModalBtn'
       )
+      const saveJournalBtn = journalModal.querySelector('#saveJournalBtn')
       qContainers.forEach((qContainer) => {
         const innerTextarea = qContainer.querySelector('textarea')
         qContainer.addEventListener('click', function () {
@@ -41,6 +42,7 @@ if (getJournalBtn) {
         .get(`/api/journals/${journalId}`)
         .then((response) => {
           const {
+            editable,
             createdAt,
             weather,
             cardId,
@@ -59,7 +61,7 @@ if (getJournalBtn) {
           journalCreatedDate.innerHTML = `${createdAt}`
           weatherOptions.forEach((option) => {
             option.selected = false
-            if (option.value === weather){
+            if (option.value === weather) {
               option.selected = true
             }
           })
@@ -78,10 +80,26 @@ if (getJournalBtn) {
           q3TextArea.value = q3
           const canvasId = `radarChart${journalId}`
           const dataValues = [listen, speak, read, write, think]
-          const radarChart = createRadarChart(canvasId, dataValues, true)
+          let radarChart
+          if (!editable) {
+            q1TextArea.disabled = true
+            q2TextArea.disabled = true
+            q3TextArea.disabled = true
+            weatherSelect.disabled = true
+            saveJournalBtn.style.display = 'none'
+            radarChart = createRadarChart(canvasId, dataValues, false, 18)
+          } else {
+            radarChart = createRadarChart(canvasId, dataValues, true, 18)
+          }
           radarChart.update()
+          // 按下關閉後，回復 Modal 顯示的初始狀態
           closeJournalModalBtn.addEventListener('click', () => {
             radarChart.destroy()
+            q1TextArea.disabled = false
+            q2TextArea.disabled = false
+            q3TextArea.disabled = false
+            weatherSelect.disabled = false
+            saveJournalBtn.style.display = 'inline'
           })
         })
         .then(() => {

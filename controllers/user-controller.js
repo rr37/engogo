@@ -97,9 +97,8 @@ const userController = {
 
         const emptyData =
           userJournals.length === 0 && userInProgressJournal.length === 0
-        console.log(emptyData)
-
-        res.render('userPage', {
+        
+          res.render('userPage', {
           isUserJournalsPage: true,
           userData,
           userJournals,

@@ -1,4 +1,6 @@
+{{> modal}}
+
 <div style="height: 180px;"></div>
 {{#each journals}}
-  {{> singleJournal}}
+  {{> singleJournal signInUserId = ../signInUserId}}
 {{/each}}

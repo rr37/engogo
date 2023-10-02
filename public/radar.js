@@ -1,5 +1,9 @@
-function createRadarChart(canvasId, dataValues, enableDragData = false) {
-
+function createRadarChart(
+  canvasId,
+  dataValues,
+  enableDragData = false,
+  pointLabelsFontSize = 0
+) {
   let ctx = document.getElementById(canvasId).getContext('2d')
   let hiddenRadarInput =
     document.getElementById(canvasId).nextElementSibling || null
@@ -68,7 +72,7 @@ function createRadarChart(canvasId, dataValues, enableDragData = false) {
         // 外圈文字大小
         pointLabels: {
           font: {
-            size: 0,
+            size: pointLabelsFontSize,
           },
         },
         min: 0,
@@ -85,7 +89,6 @@ function createRadarChart(canvasId, dataValues, enableDragData = false) {
   if (enableDragData) {
     data.datasets[0].pointRadius = 5
     data.datasets[0].pointHoverRadius = 10
-    options.scales.r.pointLabels.font.size = 18
     options.plugins.dragData = {
       round: 0,
       onDrag: (event, datasetIndex, index, value) => {
@@ -119,6 +122,7 @@ function createRadarChart(canvasId, dataValues, enableDragData = false) {
   return radarChart
 }
 
+// 渲染一般頁面的能力指標圖
 const radarCharts = document.querySelectorAll('.outSideRadarChart') || null
 if (radarCharts) {
   radarCharts.forEach(async (radar) => {

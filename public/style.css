@@ -183,3 +183,12 @@ textarea {
   word-wrap: break-word;
   flex-shrink: 1;
 }
+
+.outside-Q {
+  overflow: hidden;
+  height: 60px;
+}
+
+.outside-Q:hover {
+  overflow: auto;
+}
