@@ -1,7 +1,7 @@
 {{! 中間資訊區 }}
-<div class='row d-flex'>
+<div class='row d-flex flex-wrap'>
   {{! 中左個資區 }}
-  <div class='col-7 d-flex flex-column'>
+  <div class='col-12 col-md-7 d-flex flex-column'>
     <div class='d-flex'>
       {{! 用戶大頭貼 }}
       <a href='' class='mt-3 mb-3'>
@@ -27,7 +27,7 @@
     </div>
   </div>
   {{! 中右卡片區 }}
-  <div class='col-5 d-flex flex-column align-items-end pe-5'>
+  <div class='col-12 col-md-5 d-flex flex-column align-items-end pe-5'>
     <div class='main-page-badge rounded-pill'>挑戰中</div>
     {{#if userInProgressJournal}}
     {{#each userInProgressJournal}}
@@ -46,7 +46,7 @@
       </div>
       <img
         src='{{this.MissionCard.CardImage.cardImage}}'
-        style='object-fit: cover;width:100%;height:100%'
+        style='object-fit: cover;width:100%;'
       />
     </figure>
     {{/each}}

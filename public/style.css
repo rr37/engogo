@@ -51,7 +51,7 @@ h6 {
 .journey {
   width: 100%;
   border-radius: 20px;
-  padding: 20px 30px 50px 30px !important;
+  padding: 20px 0px 50px 30px !important;
   display: flex;
   flex-direction: column;
   background-color: #fff8eb;
@@ -73,11 +73,9 @@ h6 {
 }
 
 .Q {
-  height: 33%;
-  max-height: 100px;
+  height: 30%;
   border: 1px dashed #f2a025;
   border-radius: 24px;
-  margin-bottom: 2%;
   background: #fff;
   overflow: hidden;
 }
@@ -116,24 +114,10 @@ textarea {
   cursor: pointer;
 }
 
-.journal-card {
-  cursor: pointer;
-  transition-duration: 0.1s;
-  transition-timing-function: ease-in-out;
-}
-
-.journal-card:hover {
-  transform: translateY(-5px);
-  .card-info {
-    opacity: 1;
-    visibility: visible;
-    z-index: 5;
-  }
-}
-
 .card-info {
+  pointer-events: none;
   position: absolute;
-  width: 230px;
+  width: 100%;
   padding: 5px 12px 50px 12px;
   opacity: 0;
   background: linear-gradient(#ffffff, 75%, #ffffff00);
@@ -186,9 +170,69 @@ textarea {
 
 .outside-Q {
   overflow: hidden;
-  height: 60px;
+  height: 80px;
 }
 
 .outside-Q:hover {
   overflow: auto;
+}
+
+.journal-card {
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 10px 0px 0px 10px;
+  transition-duration: 0.1s;
+  transition-timing-function: ease-in-out;
+}
+
+.journal-card:active {
+  width: 230px;
+  border-radius: 10px;
+  transform: translateX(-90%);
+  .card-info {
+    width: 100%;
+    opacity: 1;
+    visibility: visible;
+    z-index: 5;
+  }
+}
+
+@media (max-width: 575.98px) {
+}
+
+@media (min-width: 576px) {
+  .h-sm-25 {
+    height: 25%;
+  }
+}
+
+.journal-main-h {
+  height: 33vh;
+  min-height: 300px;
+  max-height: 360px;
+  } 
+
+@media (min-width: 768px) {
+  .h-md-100 {
+    height: 100%;
+  }
+
+  .journey {
+    padding: 20px 30px 50px 30px !important;
+  }
+
+  .journal-card {
+    border-radius: 25px;
+  }
+
+  .journal-card:hover {
+    width: 100%;
+    border-radius: 25px;
+    transform: translateY(-5px);
+    .card-info {
+      opacity: 1;
+      visibility: visible;
+      z-index: 5;
+    }
+  }
 }

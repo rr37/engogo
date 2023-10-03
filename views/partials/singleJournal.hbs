@@ -2,8 +2,10 @@
   <div class='journey'>
     <h4 class='mb-4'>{{modifyTime this.date}}
       &nbsp&nbsp 天氣：{{this.weather}}</h4>
-    <div class='d-flex'>
-      <div class='col-8'>
+    <div class='d-flex justify-content-between journal-main-h'>
+      <div
+        class='col-xxl-9 col-xl-8 col-lg-7 col-md-6 col-11 d-flex flex-column justify-content-between'
+      >
         {{! Q1 }}
         <div class='Q'>
           <div class='d-flex align-items-start ps-2'>
@@ -45,10 +47,9 @@
         </div>
       </div>
       {{! Mission Card }}
-      <div class='col-4 ps-5 pb-2'>
+      <div class='ps-md-4 ps-2 col-xxl-3 col-xl-4 col-lg-5 col-md-6 col-1 position-relative'>
         <figure
           class='journal-card'
-          style='width: 230px; height: 100%; border-radius: 25px; overflow: hidden'
         >
           <div class='d-flex align-items-center card-info'>
             <div
