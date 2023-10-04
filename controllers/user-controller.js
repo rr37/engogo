@@ -95,16 +95,19 @@ const userController = {
           userInProgressJournal = InProgressJournal.map(transformJournal)
         }
 
+        const isHome = userData.id === signInUserId ? true : false
+
         const emptyData =
           userJournals.length === 0 && userInProgressJournal.length === 0
-        
-          res.render('userPage', {
+
+        res.render('userPage', {
           isUserJournalsPage: true,
           userData,
           userJournals,
           userInProgressJournal,
           emptyData,
           signInUserId,
+          isHome,
         })
       })
       .catch((err) => next(err))

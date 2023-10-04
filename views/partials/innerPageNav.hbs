@@ -1,4 +1,5 @@
-<div class='login-main-navbar d-flex'>
+{{! 中螢幕以上 nav}}
+<div class='login-main-navbar d-md-flex d-none col-md-7'>
   {{! logo }}
   <a href='/' class=''>
     <img src='/image/engogo_logo.png' />
@@ -7,3 +8,37 @@
   <h2 {{#if isExplore}}class='selected'{{/if}}><a href="/explore" class="color-white">Explore</a></h2>
   <h2><a href="/logout" class="color-white">Logout</a></h2>
 </div>
+
+{{! 中螢幕以下 nav}}
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-main d-md-none"
+>
+  <div class="container-fluid">
+    {{! logo }}
+    <a href='/' class=''>
+    <img src='/image/engogo_logo.png' />
+  </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <div class='mt-5'>
+        <h2 class='{{#if isHome}}selected{{/if}} d-inline-block m-0'>
+          <a href="/users/{{signInUserId}}/journals" class="color-white">Home
+          </a>
+        </h2>
+      </div>
+      <div class='mt-4'>
+        <h2 class='{{#if isExplore}}selected{{/if}} d-inline-block m-0'>
+          <a href="/explore" class="color-white">Explore
+          </a>
+        </h2>
+      </div>
+      <div class="mt-4 mb-3">
+        <h2 class="m-0 d-inline-block">
+          <a href="/logout" class="color-white">Logout
+          </a>
+        </h2>
+      </div>
+    </div>
+  </div>
+</nav>
