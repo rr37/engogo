@@ -1,5 +1,6 @@
 .login-main-navbar {
-  width: 632px;
+  min-width: 550px;
+  max-width: 632px;
   height: 87px;
   border-radius: 0 0 32px 0;
   position: fixed;
@@ -33,6 +34,10 @@ h6 {
 
 .color-white {
   color: #fff;
+}
+
+.bg-main {
+  background-color: #f2a025;
 }
 
 .main-page-badge {
